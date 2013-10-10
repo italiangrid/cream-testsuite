@@ -1,0 +1,50 @@
+!!!!!!!!!!!!!!!
+Version 1.8 (1st EMI2 version)
+!!!!!!!!!!!!!!!
+
+========
+LIBRARY
+========
+=> Added "LCG_GFAL_VO=..." to the outputdata jdl. Apparently, doesn't work without it (it must have used to, otherwise how haven't I met it before?)
+=> get_guid() returns an empty list if no guids are found, instead of raising an error.
+=> restart_cream() auto-detects tomcat version (through SL version)
+=> Added ldap_search() keyword
+=> Added check_resource_bdii_published_values() keyword
+=> Added wms_job_submit() keyword
+=> Added wms_get_job_status() keyword
+=> Added wms_get_final_job_status() keyword
+=> Added wms_job_logging_info() keyword
+=> Added check_wms_logging_info() keyword
+=> Added stop_old_blparser() keyword
+=> Added start_old_blparser() keyword
+=> Added _get_ssh_connection() method
+=> _enisc doesn't utilize password's anymore. It expects to be authenticated automagically, through ssh keys.
+=> Removed execute_remote_mysql_query()
+
+===========
+TEST SUITE
+===========
+=> OutputData test case: check guids for existence and log them explicitely (was only implicit till now)
+=> Automatic Proxy Purging Teardown test case: fixed delegation name
+=> Added Explicit Delegation Teardown (used in the test case with the same name, to handle delegation destruction in case of error)
+=> Added Resource BDII test case
+=> Added Logging and Bookkeeping test case
+=> Added Old BLParser Restart test case
+
+==========
+VARIABLES
+==========
+=> Added blparser_host
+=> Added blparser_root_pass
+=> Removed lrms_admin_pass and eliminated its usage
+=> Removed lrms_admin_user and replaced it with root
+=> Removed cream_root_pass and eliminated its usage
+=> Removec blparser_root_pass and eliminated its usage
+
+
+===================
+DEPENDENCIES ADDED
+===================
+=> openldap-clients
+=> whiptail
+

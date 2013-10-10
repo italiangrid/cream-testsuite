@@ -1,0 +1,10845 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Expires" content="Mon, 20 Jan 2001 20:01:21 GMT" />
+<meta name="generator" content="testdoc.py 2.5.6 (Python 2.6.5 on linux2)" />
+<style media="all" type="text/css">
+  /* Generic styles */
+  body {
+    font-family: sans-serif;
+    font-size: 0.8em;
+    color: black;
+    padding: 6px;
+  }
+  h2 {
+    margin-top: 1.2em;
+  }
+  br {
+    mso-data-placement: same-cell;  /* maintain line breaks in Excel */
+  }
+  /* Statistics Table */
+  table.statistics {
+    width: 58em;
+    border: 1px solid black;
+    border-collapse: collapse;
+    empty-cells: show;
+    margin-bottom: 1em;
+  }
+  table.statistics td, table.statistics th {
+    border: 1px solid black;
+    padding: 1px 4px;
+    margin: 0px;
+  }
+  table.statistics th {
+    background: #C6C6C6;
+  }
+  .col_stat_name {
+    width: 40em;
+  }
+  .col_stat {
+    width: 3em;
+    text-align: center;
+  }
+  .stat_name {
+    float: left;
+  }
+  .stat_name a, .stat_name span {
+    font-weight: bold;
+  }
+  .tag_links {
+    font-size: 0.9em;
+    float: right;
+    margin-top: 0.05em;
+  }
+  .tag_links span {
+    margin-left: 0.2em;
+  }
+  /* Statistics Table Graph */
+  .pass_bar {
+    background: #00f000;
+  }
+  .fail_bar {
+    background: red;
+  }
+  .no_tags_bar {
+    background: #E9E9E9;
+  }
+  .graph {
+    position: relative;
+    border: 1px solid black;
+    width: 11em;
+    height: 0.75em;
+    padding: 0px;
+    background: #E9E9E9;
+  }
+  .graph b {
+    display: block;
+    position: relative;
+    height: 100%;
+    float: left;
+    font-size: 4px;  /* to make graphs thin also in IE */
+  }
+  /* Tables in documentation */
+  table.doc {
+    border: 1px solid gray;
+    background: transparent;
+    border-collapse: collapse;
+    empty-cells: show;
+    font-size: 0.9em;
+  }
+  table.doc td {
+    border: 1px solid gray;
+    padding: 0.1em 0.3em;
+    height: 1.2em;
+  }
+  /* Misc Styles */
+  .not_available {
+    color: gray;      /* no grey in IE */
+    font-weight: normal;
+  }
+  .parent_name {
+    font-size: 0.7em;
+    letter-spacing: -0.07em;
+  }
+  a:link, a:visited {
+    text-decoration: none;
+    color: blue;
+  }
+  a:hover, a:active {
+    text-decoration: underline;
+    color: purple;
+  }
+  /* Headers */
+  .header {
+    width: 58em;
+    margin: 6px 0px;
+  }
+  h1 {
+    margin: 0px;
+    width: 70%;
+    float: left;
+  }
+  .times {
+    width: 29%;
+    float: right;
+    text-align: right;
+  }
+  .generated_time, .generated_ago {
+    font-size: 0.9em;
+  }
+  .spacer {
+    font-size: 0.8em;
+    clear: both;
+  }
+  /* Status text colors */
+  .error, .fail {
+    color: red;
+  }
+  .pass {
+    color: #009900;
+  }
+  .warn {
+    color: #FFCC00;
+  }
+  .not_run {
+    color: #663300;
+  }
+</style>
+<style media="print" type="text/css">
+  body {
+    background: white;
+    padding: 0px;
+    font-size: 8pt;
+  }
+  a:link, a:visited {
+    color: black;
+  }
+  .header, table.details, table.statistics {
+    width: 100%;
+  }
+  .generated_ago, .expand {
+    display: none;
+  }
+</style>
+<style media="all" type="text/css">
+  /* Tables */
+  body {
+    background: white;
+  }
+  table.suite, table.errors {
+    width: 100%;
+    border: 1px solid gray;  /* no grey in IE */
+    margin: 0.2em 0em;
+    padding: 0.2em;
+  }
+  table.errors td.level {
+    font-weight: bold;
+    width: 4em;
+    text-align: center;
+    vertical-align: top;
+  }
+  table.errors td.time {
+    width: 10em;
+    vertical-align: top;
+  }
+  table.test {
+    width: 100%;
+    border: 1px dashed gray;
+    margin: 0.2em 0em;
+    padding: 0.2em;
+  }
+  table.metadata, table.keyword, table.messages {
+    margin-left: 1.1em;
+    width: 100%;
+  }
+  table.metadata, table.messages {
+    margin-right: 2em;
+  }
+  table.keyword table.metadata {
+    font-size: 0.9em;
+    margin-left: 1.4em;
+  }
+  table.messages {
+    font-family: monospace;
+    font-size: 1.2em;
+  }
+  table.metadata th {
+    width: 12em;
+    text-align: left;
+    vertical-align: top;
+  }
+  table.metadata td {
+    padding-left: 0.5em;
+    vertical-align: top;
+  }
+  table.messages td {
+    vertical-align: top;
+  }
+  table.messages td.time {
+    width: 6em;
+    letter-spacing: -0.05em;
+  }
+  table.messages td.level {
+    width: 4em;
+    text-align: center;
+  }
+  /* Folding buttons */
+  div.foldingbutton {
+    text-align: center;
+    line-height: 0.8em;
+    font-size: 0.8em;
+    margin: 0.2em 0.4em 0em 0.1em;
+    height: 0.9em;
+    width: 0.9em;
+    float: left;
+    text-decoration: none;
+    font-weight: bold;
+    border: 1px solid black;
+    border: 1px solid black;
+  }
+  div.foldingbutton:hover {
+    background: yellow;
+  }
+ .expand {
+   float: right;
+   margin-right: 0.5em;
+   font-size: 0.8em;
+  }
+  /* Test, suite and kw names */
+  .name, .splitname {
+    font-weight: bold;
+    text-decoration: none;
+  }
+  a.name:hover {
+    text-decoration: none;
+    color: black;
+  }
+  table.keyword {
+    display:none;
+  }
+</style>
+<script type="text/javascript">
+    function toggle_child_visibility(element_id) {
+        if (document.getElementById(element_id + '_children') != null) {
+            toggle_visibility(element_id + '_children')
+        }
+        else {
+            toggle_visibility(element_id)
+        }
+        if (document.getElementById(element_id + '_foldlink') != null) {
+            toggle_visibility(element_id + '_foldlink')
+        }
+        if (document.getElementById(element_id + '_unfoldlink') != null) {
+            toggle_visibility(element_id + '_unfoldlink')
+        }
+    }
+    function toggle_visibility(element_id) {
+        var element = document.getElementById(element_id)
+        if (element == null) {
+            return
+        }
+        if (element.style.display == 'none') {
+            element.style.display = 'block'
+        }
+        else {
+            element.style.display = 'none'
+        }
+    }
+    function expand_all_children(element_id) {
+        var elements = document.getElementById(element_id).getElementsByTagName('div')
+        for (var i=0; i<elements.length; i++) {
+            var element = elements[i]
+            if (element.className == 'indent' && element.style.display == 'none') {
+                toggle_child_visibility(element.getAttribute('id').replace(/_children/, ''))
+            }
+        }
+    }
+    function open_element_by_url() {
+        var name = get_element_name_from_url()
+        if (name != null) {
+            set_element_visible(name)
+            window.location.hash = name  // does not seem to work with Opera
+        }
+    }
+    function get_element_name_from_url() {
+        var hash = window.location.hash
+        if (hash == '' || hash == '#' || hash == null) {
+            return null
+        }
+        return hash.slice(1).replace(/%20/g, ' ')
+    }
+    function set_element_visible(id_or_name) {
+        var element = document.getElementById(id_or_name)
+        if (element) {
+            open_parents(element)
+            return
+        }
+        var elements = document.getElementsByName(id_or_name)
+        for (var i=0; i<elements.length; i++) {
+            open_parents(elements[i])
+        }
+    }
+    // Find right type of parent element, open it and its parents
+    function open_parents(element) {
+        var parent = element.parentNode
+        if (!parent) {
+            return
+        }
+        // Find a parent table with id
+        while (parent.nodeName != 'TABLE' || parent.getAttribute('id') == null) {
+            parent = parent.parentNode
+            if (!parent) {
+               return
+            }
+        }
+        var element_id = parent.getAttribute('id')
+        if (document.getElementById(element_id+'_children').style.display == 'none') {
+            toggle_child_visibility(element_id)
+        }
+        open_parents(parent)
+    }
+</script>
+
+<title>Documentation for Cream Test Suite</title>
+</head>
+<body onload="open_element_by_url()">
+<div class="header">
+  <h1>Documentation for Cream Test Suite</h1>
+  <div class="times">
+    <span class="generated_time">Generated<br />20120803&nbsp;17:38:48&nbsp;GMT&nbsp;+03:00</span><br />
+	<span class="generated_ago">
+<script type="text/javascript">
+  function get_end(number) {
+    if (number == 1) { return ' ' }
+    return 's '
+  }
+  function get_sec_str(secs) {
+    return secs + ' second' + get_end(secs)
+  }
+  function get_min_str(mins) {
+    return mins + ' minute' + get_end(mins)
+  }
+  function get_hour_str(hours) {
+    return hours + ' hour' + get_end(hours)
+  }
+  function get_day_str(days) {
+    return days + ' day' + get_end(days)
+  }
+  function get_year_str(years) {
+    return years + ' year' + get_end(years)
+  }
+  generated = 1344004728
+  current = Math.round(new Date().getTime() / 1000)  // getTime returns millis
+  elapsed = current - generated
+  // elapsed should only be negative if clocks are not in sync
+  if (elapsed < 0) {
+    elapsed = Math.abs(elapsed)
+    prefix = '- '
+  }
+  else {
+    prefix = ''
+  }
+  secs  = elapsed % 60
+  mins  = Math.floor(elapsed / 60) % 60
+  hours = Math.floor(elapsed / (60*60)) % 24
+  days  = Math.floor(elapsed / (60*60*24)) % 365
+  years = Math.floor(elapsed / (60*60*24*365))
+  if (years > 0) {
+    // compencate the effect of leap years (not perfect but should be enough)
+    days = days - Math.floor(years / 4)
+    if (days < 0) { days = 0 }
+    output = get_year_str(years) + get_day_str(days)
+  }
+  else if (days > 0) {
+    output = get_day_str(days) +  get_hour_str(hours)
+  }
+  else if (hours > 0) {
+    output = get_hour_str(hours) + get_min_str(mins)
+  }
+  else if (mins > 0) {
+    output = get_min_str(mins) + get_sec_str(secs)
+  }
+  else {
+    output = get_sec_str(secs)
+  }
+  document.write(prefix + output + 'ago')
+</script>
+    </span>
+  </div>
+</div>
+<div class="spacer">&nbsp;</div>
+<table class="suite" id="suite000001">
+<tr>
+<td>
+<a class="expand" href="javascript:expand_all_children('suite000001')">Expand All</a>
+<div class="foldingbutton" id="suite000001_unfoldlink" onclick="toggle_child_visibility('suite000001');" style="display: none;">+</div>
+<div class="foldingbutton" id="suite000001_foldlink" onclick="toggle_child_visibility('suite000001');" style="display: block;">-</div>
+<span class="not_run">TEST&nbsp;SUITE: </span>
+<a class="name" name="suite_Cream Test Suite" title="Cream Test Suite">Cream Test Suite</a>
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="suite000001_children" style="display: block;">
+<table class="metadata">
+<tr><th>Full Name:</th><td>Cream Test Suite</td></tr>
+<tr><th>Documentation:</th><td>This is the main testing module,needed for testing the CREAM functionality.For more information check these urls: <br />
+CREAM User's Guide: <br />
+<a href="http://wiki.italiangrid.org/twiki/bin/view/CREAM/UserGuide">http://wiki.italiangrid.org/twiki/bin/view/CREAM/UserGuide</a> <br />
+JDL Guide: <br />
+<a href="http://wiki.italiangrid.org/twiki/bin/view/CREAM/JdlGuide">http://wiki.italiangrid.org/twiki/bin/view/CREAM/JdlGuide</a> <br />
+CREAM Administrator's Guide: <br />
+<a href="http://wiki.italiangrid.org/twiki/bin/view/CREAM/SystemAdministratorGuideForEMI1">http://wiki.italiangrid.org/twiki/bin/view/CREAM/SystemAdministratorGuideForEMI1</a> <br />
+CREAM Test Suite Guide: <br />
+<a href="https://twiki.cern.ch/twiki/bin/view/EMI/CREAMRobotFuncTests">https://twiki.cern.ch/twiki/bin/view/EMI/CREAMRobotFuncTests</a> <br />
+EMI Robot Framework Quickstart Guide: <br />
+<a href="https://twiki.cern.ch/twiki/bin/view/EMI/RobotFrameworkQuickstartGuide">https://twiki.cern.ch/twiki/bin/view/EMI/RobotFrameworkQuickstartGuide</a></td></tr>
+<tr><th>Temporary Files Location:</th><td>${tmp_dir}</td></tr>
+<tr><th>Source:</th><td><a href="cream_test_suite.html">/home/dfiore/Desktop/untitled folder/cream_test_suite.html</a></td></tr>
+<tr><th>Number of Tests:</th><td>39</td></tr>
+</table>
+<table class="keyword" id="kw000001">
+<tr>
+<td>
+
+
+<span class="arg"></span>
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000001_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="test" id="test000001">
+<tr>
+<td>
+<div class="foldingbutton" id="test000001_unfoldlink" onclick="toggle_child_visibility('test000001');" style="display: none;">-</div>
+<div class="foldingbutton" id="test000001_foldlink" onclick="toggle_child_visibility('test000001');" style="display: block;">+</div>
+<span class="not_run">TEST&nbsp;CASE: </span>
+<a class="name" name="test_Cream Test Suite.Set Log Level" title="Cream Test Suite.Set Log Level">Set Log Level</a>
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="test000001_children" style="display: none;">
+<table class="metadata">
+<tr><th>Full Name:</th><td>Cream Test Suite.Set Log Level</td></tr>
+<tr><th>Documentation:</th><td>Set the log level used for the test suite. This changes the verbosity of the final test suite log files.</td></tr>
+<tr><th>Tags:</th><td>loglevel, setup</td></tr>
+</table>
+<table class="keyword" id="kw000002">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000002_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="test" id="test000002">
+<tr>
+<td>
+<div class="foldingbutton" id="test000002_unfoldlink" onclick="toggle_child_visibility('test000002');" style="display: none;">-</div>
+<div class="foldingbutton" id="test000002_foldlink" onclick="toggle_child_visibility('test000002');" style="display: block;">+</div>
+<span class="not_run">TEST&nbsp;CASE: </span>
+<a class="name" name="test_Cream Test Suite.Check Executables" title="Cream Test Suite.Check Executables">Check Executables</a>
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="test000002_children" style="display: none;">
+<table class="metadata">
+<tr><th>Full Name:</th><td>Cream Test Suite.Check Executables</td></tr>
+<tr><th>Documentation:</th><td>Check whether the needed executables for the test are available in the underlying system.</td></tr>
+<tr><th>Tags:</th><td>check_exe, setup</td></tr>
+</table>
+<table class="keyword" id="kw000003">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000003_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000004">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000004_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000005">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000005_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000006">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000006_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000007">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000007_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000008">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000008_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000009">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000009_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000010">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000010_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000011">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000011_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000012">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000012_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000013">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000013_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000014">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000014_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000015">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000015_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000016">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000016_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000017">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000017_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000018">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000018_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000019">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000019_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000020">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000020_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000021">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000021_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000022">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000022_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000023">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000023_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000024">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000024_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="test" id="test000003">
+<tr>
+<td>
+<div class="foldingbutton" id="test000003_unfoldlink" onclick="toggle_child_visibility('test000003');" style="display: none;">-</div>
+<div class="foldingbutton" id="test000003_foldlink" onclick="toggle_child_visibility('test000003');" style="display: block;">+</div>
+<span class="not_run">TEST&nbsp;CASE: </span>
+<a class="name" name="test_Cream Test Suite.Simple Submit" title="Cream Test Suite.Simple Submit">Simple Submit</a>
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="test000003_children" style="display: none;">
+<table class="metadata">
+<tr><th>Full Name:</th><td>Cream Test Suite.Simple Submit</td></tr>
+<tr><th>Documentation:</th><td>Execute /bin/uname -a.Submit the jdl and wait for final job status to be done-ok.</td></tr>
+<tr><th>Tags:</th><td>authz, blparser, simple</td></tr>
+</table>
+<table class="keyword" id="kw000025">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000025_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000026">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000026_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000027">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000027_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000028">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000028_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000029">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000029_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000030">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000030_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000031">
+<tr>
+<td>
+
+
+<span class="arg"></span>
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000031_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="test" id="test000004">
+<tr>
+<td>
+<div class="foldingbutton" id="test000004_unfoldlink" onclick="toggle_child_visibility('test000004');" style="display: none;">-</div>
+<div class="foldingbutton" id="test000004_foldlink" onclick="toggle_child_visibility('test000004');" style="display: block;">+</div>
+<span class="not_run">TEST&nbsp;CASE: </span>
+<a class="name" name="test_Cream Test Suite.ISB Base URI" title="Cream Test Suite.ISB Base URI">ISB Base URI</a>
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="test000004_children" style="display: none;">
+<table class="metadata">
+<tr><th>Full Name:</th><td>Cream Test Suite.ISB Base URI</td></tr>
+<tr><th>Documentation:</th><td>Execute a bash shell script.The script is stored in a gridftp server.The jdl attribute InputSandboxBaseURI is used.First upload the executable script,then submit the jdl and the final state should be done-ok.</td></tr>
+<tr><th>Tags:</th><td>isb_baseuri</td></tr>
+</table>
+<table class="keyword" id="kw000032">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000032_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000033">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000033_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000034">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000034_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000035">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000035_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000036">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000036_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000037">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000037_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000038">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000038_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000039">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000039_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000040">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000040_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000041">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000041_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000042">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000042_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000043">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000043_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000044">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000044_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000045">
+<tr>
+<td>
+
+
+<span class="arg"></span>
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000045_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="test" id="test000005">
+<tr>
+<td>
+<div class="foldingbutton" id="test000005_unfoldlink" onclick="toggle_child_visibility('test000005');" style="display: none;">-</div>
+<div class="foldingbutton" id="test000005_foldlink" onclick="toggle_child_visibility('test000005');" style="display: block;">+</div>
+<span class="not_run">TEST&nbsp;CASE: </span>
+<a class="name" name="test_Cream Test Suite.ISB Client to CE" title="Cream Test Suite.ISB Client to CE">ISB Client to CE</a>
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="test000005_children" style="display: none;">
+<table class="metadata">
+<tr><th>Full Name:</th><td>Cream Test Suite.ISB Client to CE</td></tr>
+<tr><th>Documentation:</th><td>Execute a bash shell script.The script is stored on the UI.The jdl attribute InputSandbox is used.Firstly submit the jdl and then wait for final job state to be done-ok.</td></tr>
+<tr><th>Tags:</th><td>isb_client</td></tr>
+</table>
+<table class="keyword" id="kw000046">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000046_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000047">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000047_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000048">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000048_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000049">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000049_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000050">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000050_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000051">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000051_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000052">
+<tr>
+<td>
+
+
+<span class="arg"></span>
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000052_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="test" id="test000006">
+<tr>
+<td>
+<div class="foldingbutton" id="test000006_unfoldlink" onclick="toggle_child_visibility('test000006');" style="display: none;">-</div>
+<div class="foldingbutton" id="test000006_foldlink" onclick="toggle_child_visibility('test000006');" style="display: block;">+</div>
+<span class="not_run">TEST&nbsp;CASE: </span>
+<a class="name" name="test_Cream Test Suite.ISB gsiftp to CE" title="Cream Test Suite.ISB gsiftp to CE">ISB gsiftp to CE</a>
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="test000006_children" style="display: none;">
+<table class="metadata">
+<tr><th>Full Name:</th><td>Cream Test Suite.ISB gsiftp to CE</td></tr>
+<tr><th>Documentation:</th><td>Execute a bash shell script.The script is stored in a gridftp server.The jdl attribute InputSandbox is used.First upload the executable script,then submit the jdl and the final state should be done-ok.</td></tr>
+<tr><th>Tags:</th><td>isb_gsiftp</td></tr>
+</table>
+<table class="keyword" id="kw000053">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000053_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000054">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000054_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000055">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000055_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000056">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000056_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000057">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000057_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000058">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000058_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000059">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000059_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000060">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000060_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000061">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000061_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000062">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000062_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000063">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000063_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000064">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000064_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000065">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000065_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000066">
+<tr>
+<td>
+
+
+<span class="arg"></span>
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000066_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="test" id="test000007">
+<tr>
+<td>
+<div class="foldingbutton" id="test000007_unfoldlink" onclick="toggle_child_visibility('test000007');" style="display: none;">-</div>
+<div class="foldingbutton" id="test000007_foldlink" onclick="toggle_child_visibility('test000007');" style="display: block;">+</div>
+<span class="not_run">TEST&nbsp;CASE: </span>
+<a class="name" name="test_Cream Test Suite.OSB localhost" title="Cream Test Suite.OSB localhost">OSB localhost</a>
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="test000007_children" style="display: none;">
+<table class="metadata">
+<tr><th>Full Name:</th><td>Cream Test Suite.OSB localhost</td></tr>
+<tr><th>Documentation:</th><td>Execute /bin/uname -a.Store std out and error streams on "<a href="gsiftp://localhost">gsiftp://localhost</a>" .Firstly submit the jdl,wait for final job state done-ok,download the produced files,get the output file list from the jdl file and compare the two file lists.</td></tr>
+<tr><th>Tags:</th><td>osb_localhost</td></tr>
+</table>
+<table class="keyword" id="kw000067">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000067_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000068">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000068_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000069">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000069_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000070">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000070_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000071">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000071_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000072">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000072_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000073">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000073_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000074">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000074_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000075">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000075_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000076">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000076_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000077">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000077_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000078">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000078_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000079">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000079_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000080">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000080_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000081">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000081_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000082">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000082_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000083">
+<tr>
+<td>
+
+
+<span class="arg"></span>
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000083_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="test" id="test000008">
+<tr>
+<td>
+<div class="foldingbutton" id="test000008_unfoldlink" onclick="toggle_child_visibility('test000008');" style="display: none;">-</div>
+<div class="foldingbutton" id="test000008_foldlink" onclick="toggle_child_visibility('test000008');" style="display: block;">+</div>
+<span class="not_run">TEST&nbsp;CASE: </span>
+<a class="name" name="test_Cream Test Suite.OSB gsiftp BaseDestURI" title="Cream Test Suite.OSB gsiftp BaseDestURI">OSB gsiftp BaseDestURI</a>
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="test000008_children" style="display: none;">
+<table class="metadata">
+<tr><th>Full Name:</th><td>Cream Test Suite.OSB gsiftp BaseDestURI</td></tr>
+<tr><th>Documentation:</th><td>Execute /bin/uname -a.Store std out and error streams on a gridftp server.The jdl attribute OutputSandboxBaseDestURI is used.<br />
+2) Get output file list from jdl,base dest uri.<br />
+3) lcg-ls base dest uri and files shouldn't exist<br />
+4) Execute jdl<br />
+5) lcg-ls base dest uri and files should exist<br />
+6) Delete files (cleanup)<br />
+7) lcg-ls base dest uri and files shouldn't exist</td></tr>
+<tr><th>Tags:</th><td>osb_basedesturi</td></tr>
+</table>
+<table class="keyword" id="kw000084">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000084_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000085">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000085_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000086">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000086_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000087">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000087_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000088">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000088_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000089">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000089_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000090">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000090_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000091">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000091_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000092">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000092_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000093">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000093_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000094">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000094_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000095">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000095_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000096">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000096_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000097">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000097_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000098">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000098_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000099">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000099_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000100">
+<tr>
+<td>
+
+
+<span class="arg"></span>
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000100_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="test" id="test000009">
+<tr>
+<td>
+<div class="foldingbutton" id="test000009_unfoldlink" onclick="toggle_child_visibility('test000009');" style="display: none;">-</div>
+<div class="foldingbutton" id="test000009_foldlink" onclick="toggle_child_visibility('test000009');" style="display: block;">+</div>
+<span class="not_run">TEST&nbsp;CASE: </span>
+<a class="name" name="test_Cream Test Suite.OSB gsiftp DestURI" title="Cream Test Suite.OSB gsiftp DestURI">OSB gsiftp DestURI</a>
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="test000009_children" style="display: none;">
+<table class="metadata">
+<tr><th>Full Name:</th><td>Cream Test Suite.OSB gsiftp DestURI</td></tr>
+<tr><th>Documentation:</th><td>Execute /bin/uname -a.Store std out and error streams on a gridftp server.The jdl attribute OutputSandboxDestURI is used.<br />
+2) Get output file list from jdl,base dest uri.<br />
+3) lcg-ls base dest uri and files shouldn't exist<br />
+4) Execute jdl<br />
+5) lcg-ls base dest uri and files should exist<br />
+6) Delete files (cleanup)<br />
+7) lcg-ls base dest uri and files shouldn't exist</td></tr>
+<tr><th>Tags:</th><td>osb_desturi</td></tr>
+</table>
+<table class="keyword" id="kw000101">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000101_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000102">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000102_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000103">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000103_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000104">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000104_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000105">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000105_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000106">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000106_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000107">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000107_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000108">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000108_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000109">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000109_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000110">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000110_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000111">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000111_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000112">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000112_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000113">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000113_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000114">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000114_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000115">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000115_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000116">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000116_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000117">
+<tr>
+<td>
+
+
+<span class="arg"></span>
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000117_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="test" id="test000010">
+<tr>
+<td>
+<div class="foldingbutton" id="test000010_unfoldlink" onclick="toggle_child_visibility('test000010');" style="display: none;">-</div>
+<div class="foldingbutton" id="test000010_foldlink" onclick="toggle_child_visibility('test000010');" style="display: block;">+</div>
+<span class="not_run">TEST&nbsp;CASE: </span>
+<a class="name" name="test_Cream Test Suite.Environment" title="Cream Test Suite.Environment">Environment</a>
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="test000010_children" style="display: none;">
+<table class="metadata">
+<tr><th>Full Name:</th><td>Cream Test Suite.Environment</td></tr>
+<tr><th>Documentation:</th><td>Execute a bash shell script.The script is stored locally.The jdl sets an environmental variable.The script prints the value of that variable.<br />
+Submit the jdl,the final state should be done-ok and the output file should have the designated variable.</td></tr>
+<tr><th>Tags:</th><td>env</td></tr>
+</table>
+<table class="keyword" id="kw000118">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000118_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000119">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000119_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000120">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000120_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000121">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000121_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000122">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000122_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000123">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000123_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000124">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000124_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000125">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000125_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000126">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000126_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000127">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000127_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000128">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000128_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000129">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000129_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000130">
+<tr>
+<td>
+
+
+<span class="arg"></span>
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000130_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="test" id="test000011">
+<tr>
+<td>
+<div class="foldingbutton" id="test000011_unfoldlink" onclick="toggle_child_visibility('test000011');" style="display: none;">-</div>
+<div class="foldingbutton" id="test000011_foldlink" onclick="toggle_child_visibility('test000011');" style="display: block;">+</div>
+<span class="not_run">TEST&nbsp;CASE: </span>
+<a class="name" name="test_Cream Test Suite.Epilogue" title="Cream Test Suite.Epilogue">Epilogue</a>
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="test000011_children" style="display: none;">
+<table class="metadata">
+<tr><th>Full Name:</th><td>Cream Test Suite.Epilogue</td></tr>
+<tr><th>Documentation:</th><td>Execute two bash shell scripts,one for the job and the other as an epilogue.The epilogue script creates a file with a certain string,which is collected by CREAM as an output file.Submit the jdl,the final state should be done ok,and the output file should have the designated string.</td></tr>
+<tr><th>Tags:</th><td>epilogue</td></tr>
+</table>
+<table class="keyword" id="kw000131">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000131_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000132">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000132_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000133">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000133_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000134">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000134_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000135">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000135_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000136">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000136_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000137">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000137_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000138">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000138_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000139">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000139_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000140">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000140_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000141">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000141_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000142">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000142_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000143">
+<tr>
+<td>
+
+
+<span class="arg"></span>
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000143_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="test" id="test000012">
+<tr>
+<td>
+<div class="foldingbutton" id="test000012_unfoldlink" onclick="toggle_child_visibility('test000012');" style="display: none;">-</div>
+<div class="foldingbutton" id="test000012_foldlink" onclick="toggle_child_visibility('test000012');" style="display: block;">+</div>
+<span class="not_run">TEST&nbsp;CASE: </span>
+<a class="name" name="test_Cream Test Suite.Prologue" title="Cream Test Suite.Prologue">Prologue</a>
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="test000012_children" style="display: none;">
+<table class="metadata">
+<tr><th>Full Name:</th><td>Cream Test Suite.Prologue</td></tr>
+<tr><th>Documentation:</th><td>Execute two bash shell scripts,one for the job and the other as a prologue.The prologue script creates a file with a certain string,which is collected by CREAM as an output file.Submit the jdl,the final state should be done ok,and the output file should have the designated string.</td></tr>
+<tr><th>Tags:</th><td>prologue</td></tr>
+</table>
+<table class="keyword" id="kw000144">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000144_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000145">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000145_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000146">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000146_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000147">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000147_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000148">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000148_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000149">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000149_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000150">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000150_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000151">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000151_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000152">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000152_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000153">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000153_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000154">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000154_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000155">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000155_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000156">
+<tr>
+<td>
+
+
+<span class="arg"></span>
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000156_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="test" id="test000013">
+<tr>
+<td>
+<div class="foldingbutton" id="test000013_unfoldlink" onclick="toggle_child_visibility('test000013');" style="display: none;">-</div>
+<div class="foldingbutton" id="test000013_foldlink" onclick="toggle_child_visibility('test000013');" style="display: block;">+</div>
+<span class="not_run">TEST&nbsp;CASE: </span>
+<a class="name" name="test_Cream Test Suite.Explicit Delegation" title="Cream Test Suite.Explicit Delegation">Explicit Delegation</a>
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="test000013_children" style="display: none;">
+<table class="metadata">
+<tr><th>Full Name:</th><td>Cream Test Suite.Explicit Delegation</td></tr>
+<tr><th>Documentation:</th><td>Test job submission with explicit delegation.Three cases are tested:<br />
+1) Delegate a proxy and submit a job (job final state should be done-ok)<br />
+2) Create an allready existing delegation id (failure is treated as correct behaviour)<br />
+3) Submit job with explicit delegation of a non existant delegation id (failure is treated as correct behaviour)</td></tr>
+<tr><th>Tags:</th><td>deleg</td></tr>
+</table>
+<table class="keyword" id="kw000157">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000157_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000158">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000158_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000159">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000159_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000160">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000160_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000161">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000161_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000162">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000162_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000163">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000163_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000164">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000164_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000165">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000165_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000166">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000166_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000167">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000167_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000168">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000168_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000169">
+<tr>
+<td>
+
+
+<span class="arg"></span>
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000169_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="test" id="test000014">
+<tr>
+<td>
+<div class="foldingbutton" id="test000014_unfoldlink" onclick="toggle_child_visibility('test000014');" style="display: none;">-</div>
+<div class="foldingbutton" id="test000014_foldlink" onclick="toggle_child_visibility('test000014');" style="display: block;">+</div>
+<span class="not_run">TEST&nbsp;CASE: </span>
+<a class="name" name="test_Cream Test Suite.Job Cancel" title="Cream Test Suite.Job Cancel">Job Cancel</a>
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="test000014_children" style="display: none;">
+<table class="metadata">
+<tr><th>Full Name:</th><td>Cream Test Suite.Job Cancel</td></tr>
+<tr><th>Documentation:</th><td>Test job cancellation.Two cases are tested:<br />
+1) Submit and then cancel a job.The final state should be cancelled.<br />
+2) Cancel the aforementioned job again (failure is treated as correct behaviour).</td></tr>
+<tr><th>Tags:</th><td>blparser, cancel</td></tr>
+</table>
+<table class="keyword" id="kw000170">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000170_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000171">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000171_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000172">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000172_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000173">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000173_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000174">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000174_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000175">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000175_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000176">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000176_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000177">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000177_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000178">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000178_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000179">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000179_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000180">
+<tr>
+<td>
+
+
+<span class="arg"></span>
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000180_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="test" id="test000015">
+<tr>
+<td>
+<div class="foldingbutton" id="test000015_unfoldlink" onclick="toggle_child_visibility('test000015');" style="display: none;">-</div>
+<div class="foldingbutton" id="test000015_foldlink" onclick="toggle_child_visibility('test000015');" style="display: block;">+</div>
+<span class="not_run">TEST&nbsp;CASE: </span>
+<a class="name" name="test_Cream Test Suite.Job List" title="Cream Test Suite.Job List">Job List</a>
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="test000015_children" style="display: none;">
+<table class="metadata">
+<tr><th>Full Name:</th><td>Cream Test Suite.Job List</td></tr>
+<tr><th>Documentation:</th><td>Test the job listing cli utility.Store the list of the user's jobs,before and after a job submission.The returned job id shouldn't exist in the job list command output before the submission and should exist afterwards.</td></tr>
+<tr><th>Tags:</th><td>list</td></tr>
+</table>
+<table class="keyword" id="kw000181">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000181_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000182">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000182_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000183">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000183_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000184">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000184_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000185">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000185_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000186">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000186_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000187">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000187_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000188">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000188_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000189">
+<tr>
+<td>
+
+
+<span class="arg"></span>
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000189_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="test" id="test000016">
+<tr>
+<td>
+<div class="foldingbutton" id="test000016_unfoldlink" onclick="toggle_child_visibility('test000016');" style="display: none;">-</div>
+<div class="foldingbutton" id="test000016_foldlink" onclick="toggle_child_visibility('test000016');" style="display: block;">+</div>
+<span class="not_run">TEST&nbsp;CASE: </span>
+<a class="name" name="test_Cream Test Suite.Job Suspend - Resume" title="Cream Test Suite.Job Suspend - Resume">Job Suspend - Resume</a>
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="test000016_children" style="display: none;">
+<table class="metadata">
+<tr><th>Full Name:</th><td>Cream Test Suite.Job Suspend - Resume</td></tr>
+<tr><th>Documentation:</th><td>Submit a job and suspend it.Wait until it's state is REALLY-RUNNING.<br />
+Case LSF batch system:<br />
+It's state should be HELD.Then resume the same job.It's status should be REALLY-RUNNING.The final status should be DONE-OK.<br />
+Case Torque batch system:<br />
+It's state should still be REALLY-RUNNING.Resume the job and expect an error.It's status should be REALLY-RUNNING.The final status should be DONE-OK.</td></tr>
+<tr><th>Tags:</th><td>susp_res</td></tr>
+</table>
+<table class="keyword" id="kw000190">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000190_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000191">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000191_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000192">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000192_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000193">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000193_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000194">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000194_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000195">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000195_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000196">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000196_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000197">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000197_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000198">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000198_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000199">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000199_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000200">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000200_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000201">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000201_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000202">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000202_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000203">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000203_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000204">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000204_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000205">
+<tr>
+<td>
+
+
+<span class="arg"></span>
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000205_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="test" id="test000017">
+<tr>
+<td>
+<div class="foldingbutton" id="test000017_unfoldlink" onclick="toggle_child_visibility('test000017');" style="display: none;">-</div>
+<div class="foldingbutton" id="test000017_foldlink" onclick="toggle_child_visibility('test000017');" style="display: block;">+</div>
+<span class="not_run">TEST&nbsp;CASE: </span>
+<a class="name" name="test_Cream Test Suite.Manually Cancel Job" title="Cream Test Suite.Manually Cancel Job">Manually Cancel Job</a>
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="test000017_children" style="display: none;">
+<table class="metadata">
+<tr><th>Full Name:</th><td>Cream Test Suite.Manually Cancel Job</td></tr>
+<tr><th>Documentation:</th><td>Submit a job and then manually cancel it on the LRMS host.<br />
+The final status should be either "DONE-FAILED" or "CANCELLED"<br />
+Internally, ssh is used to connect and execute qstat and qdel on the Torque host by a torque admin user.</td></tr>
+<tr><th>Tags:</th><td>man_cancel</td></tr>
+</table>
+<table class="keyword" id="kw000206">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000206_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000207">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000207_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000208">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000208_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000209">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000209_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000210">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000210_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000211">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000211_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000212">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000212_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000213">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000213_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000214">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000214_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000215">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000215_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000216">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000216_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000217">
+<tr>
+<td>
+
+
+<span class="arg"></span>
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000217_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="test" id="test000018">
+<tr>
+<td>
+<div class="foldingbutton" id="test000018_unfoldlink" onclick="toggle_child_visibility('test000018');" style="display: none;">-</div>
+<div class="foldingbutton" id="test000018_foldlink" onclick="toggle_child_visibility('test000018');" style="display: block;">+</div>
+<span class="not_run">TEST&nbsp;CASE: </span>
+<a class="name" name="test_Cream Test Suite.Verify CE service info" title="Cream Test Suite.Verify CE service info">Verify CE service info</a>
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="test000018_children" style="display: none;">
+<table class="metadata">
+<tr><th>Full Name:</th><td>Cream Test Suite.Verify CE service info</td></tr>
+<tr><th>Documentation:</th><td>This test case verifies the output of the glite-ce-service-info command for both verbosity levels.</td></tr>
+<tr><th>Tags:</th><td>ce_info</td></tr>
+</table>
+<table class="keyword" id="kw000218">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000218_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000219">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000219_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000220">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000220_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000221">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000221_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000222">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000222_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000223">
+<tr>
+<td>
+
+
+<span class="arg"></span>
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000223_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="test" id="test000019">
+<tr>
+<td>
+<div class="foldingbutton" id="test000019_unfoldlink" onclick="toggle_child_visibility('test000019');" style="display: none;">-</div>
+<div class="foldingbutton" id="test000019_foldlink" onclick="toggle_child_visibility('test000019');" style="display: block;">+</div>
+<span class="not_run">TEST&nbsp;CASE: </span>
+<a class="name" name="test_Cream Test Suite.Enable - Disable Submission" title="Cream Test Suite.Enable - Disable Submission">Enable - Disable Submission</a>
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="test000019_children" style="display: none;">
+<table class="metadata">
+<tr><th>Full Name:</th><td>Cream Test Suite.Enable - Disable Submission</td></tr>
+<tr><th>Documentation:</th><td>This test case tests the proper functionality of the glite-ce-allowed-submission and glite-ce-enable/disable-submission commands, for admin and non-admin users.<br />
+The test executes the following steps:<br />
+1) Checks if initially the submission is allowed (it should)<br />
+2) Executes a simple job (it should succeed)<br />
+3) Disables submission (the current user executing the test case is considered to NOT be a CREAM admin, thus this step should fail)<br />
+4) Add the current user as a CREAM admin<br />
+5) Disable submission (this time it should succeed)<br />
+6) Check if submission is allowed (it shouldn't)<br />
+7) Execute a simple job submission (it should fail)<br />
+8) Enable submission<br />
+9) Execute a simple job (it should succeed)<br />
+10) Remove current user from CREAM admin<br />
+11) Disable submission (should fail, since the user isn't a CREAM admin anymore)<br />
+This test case internally uses root ssh access to the cream host, in order to add/remove a cream administrator.</td></tr>
+<tr><th>Tags:</th><td>en_dis_sub</td></tr>
+</table>
+<table class="keyword" id="kw000224">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000224_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000225">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000225_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000226">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000226_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000227">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000227_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000228">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000228_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000229">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000229_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000230">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000230_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000231">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000231_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000232">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000232_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000233">
+<tr>
+<td>
+
+
+<span class="arg"></span>
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000233_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000234">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000234_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000235">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000235_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000236">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000236_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000237">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000237_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000238">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000238_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000239">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000239_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000240">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000240_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000241">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000241_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000242">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000242_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000243">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000243_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000244">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000244_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000245">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000245_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000246">
+<tr>
+<td>
+
+
+<span class="arg"></span>
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000246_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="test" id="test000020">
+<tr>
+<td>
+<div class="foldingbutton" id="test000020_unfoldlink" onclick="toggle_child_visibility('test000020');" style="display: none;">-</div>
+<div class="foldingbutton" id="test000020_foldlink" onclick="toggle_child_visibility('test000020');" style="display: block;">+</div>
+<span class="not_run">TEST&nbsp;CASE: </span>
+<a class="name" name="test_Cream Test Suite.Job Purge" title="Cream Test Suite.Job Purge">Job Purge</a>
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="test000020_children" style="display: none;">
+<table class="metadata">
+<tr><th>Full Name:</th><td>Cream Test Suite.Job Purge</td></tr>
+<tr><th>Documentation:</th><td>This test case verifies the proper functionality of the glite-ce-job-purge command. In order to do that, it purges a job and then searches for its status and its sandbox dirs on the cream node. The job shouldn't be found by the status command and the sandbox dirs shouldn't exist.</td></tr>
+<tr><th>Tags:</th><td>purge</td></tr>
+</table>
+<table class="keyword" id="kw000247">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000247_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000248">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000248_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000249">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000249_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000250">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000250_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000251">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000251_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000252">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000252_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000253">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000253_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000254">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000254_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000255">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000255_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000256">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000256_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000257">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000257_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="test" id="test000021">
+<tr>
+<td>
+<div class="foldingbutton" id="test000021_unfoldlink" onclick="toggle_child_visibility('test000021');" style="display: none;">-</div>
+<div class="foldingbutton" id="test000021_foldlink" onclick="toggle_child_visibility('test000021');" style="display: block;">+</div>
+<span class="not_run">TEST&nbsp;CASE: </span>
+<a class="name" name="test_Cream Test Suite.Admin Manage Job" title="Cream Test Suite.Admin Manage Job">Admin Manage Job</a>
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="test000021_children" style="display: none;">
+<table class="metadata">
+<tr><th>Full Name:</th><td>Cream Test Suite.Admin Manage Job</td></tr>
+<tr><th>Documentation:</th><td>This test case checks whether a user can manage other people's jobs when being or not being an admin. Test case algorithm:<br />
+1) Submit a sleep job and wait until it reaches the REALLY-RUNNING state<br />
+2) Create a new proxy with different credentials that the default (a second cert and key are required for this, pointed to by the relevant variables)<br />
+3) Try to cancel the job (should fail, since the user with the second proxy isn't an admin)<br />
+4) Make the user with the second proxy a cream admin<br />
+5) Try to cancel the job (should succeed, since the user with the second proxy is an admin now)<br />
+6) Remove the user with the second proxy from the admin list.</td></tr>
+<tr><th>Tags:</th><td>job_man</td></tr>
+</table>
+<table class="keyword" id="kw000258">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000258_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000259">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000259_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000260">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000260_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000261">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000261_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000262">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000262_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000263">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000263_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000264">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000264_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000265">
+<tr>
+<td>
+
+
+<span class="arg"></span>
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000265_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000266">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000266_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000267">
+<tr>
+<td>
+
+
+<span class="arg"></span>
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000267_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000268">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000268_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000269">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000269_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000270">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000270_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000271">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000271_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000272">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000272_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000273">
+<tr>
+<td>
+
+
+<span class="arg"></span>
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000273_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="test" id="test000022">
+<tr>
+<td>
+<div class="foldingbutton" id="test000022_unfoldlink" onclick="toggle_child_visibility('test000022');" style="display: none;">-</div>
+<div class="foldingbutton" id="test000022_foldlink" onclick="toggle_child_visibility('test000022');" style="display: block;">+</div>
+<span class="not_run">TEST&nbsp;CASE: </span>
+<a class="name" name="test_Cream Test Suite.Limiter" title="Cream Test Suite.Limiter">Limiter</a>
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="test000022_children" style="display: none;">
+<table class="metadata">
+<tr><th>Full Name:</th><td>Cream Test Suite.Limiter</td></tr>
+<tr><th>Documentation:</th><td>NOTE: This test case is about 25 minutes long!<br />
+This test case, tests the functionality of the CREAM self limiting behaviour. It has the following logic:<br />
+1) Set a limiter threshold to a value which will triger it<br />
+2) Wait for 11 minutes for the limiter script to be run automatically<br />
+3) Submit and job and expect failure<br />
+4) Reset the limiter to the original values<br />
+5) Wait for 11 minutes for the limiter script to be run automatically<br />
+6) Submit a command and succeed</td></tr>
+<tr><th>Tags:</th><td>limit</td></tr>
+</table>
+<table class="keyword" id="kw000274">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000274_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000275">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000275_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000276">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000276_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000277">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000277_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000278">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000278_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000279">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000279_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000280">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000280_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000281">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000281_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000282">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000282_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000283">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000283_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000284">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000284_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000285">
+<tr>
+<td>
+
+
+<span class="arg"></span>
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000285_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="test" id="test000023">
+<tr>
+<td>
+<div class="foldingbutton" id="test000023_unfoldlink" onclick="toggle_child_visibility('test000023');" style="display: none;">-</div>
+<div class="foldingbutton" id="test000023_foldlink" onclick="toggle_child_visibility('test000023');" style="display: block;">+</div>
+<span class="not_run">TEST&nbsp;CASE: </span>
+<a class="name" name="test_Cream Test Suite.Ban User" title="Cream Test Suite.Ban User">Ban User</a>
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="test000023_children" style="display: none;">
+<table class="metadata">
+<tr><th>Full Name:</th><td>Cream Test Suite.Ban User</td></tr>
+<tr><th>Documentation:</th><td>This test case tests if the banning of user works. The test case has the following logic:<br />
+1) Add the user's DN to /etc/lcas/ban_users.db on the cream host<br />
+-OR-<br />
+1) Create a ban rule for the user's DN on the Argus host<br />
+2) Submit job and expect failure<br />
+3) Remove DN from the aforementioned file<br />
+4) Submit job and succeed</td></tr>
+<tr><th>Tags:</th><td>authz, ban</td></tr>
+</table>
+<table class="keyword" id="kw000286">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000286_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000287">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000287_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000288">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000288_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000289">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000289_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000290">
+<tr>
+<td>
+
+
+<span class="arg"></span>
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000290_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000291">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000291_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000292">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000292_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000293">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000293_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000294">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000294_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000295">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000295_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000296">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000296_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000297">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000297_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000298">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000298_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000299">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000299_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000300">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000300_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000301">
+<tr>
+<td>
+
+
+<span class="arg"></span>
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000301_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="test" id="test000024">
+<tr>
+<td>
+<div class="foldingbutton" id="test000024_unfoldlink" onclick="toggle_child_visibility('test000024');" style="display: none;">-</div>
+<div class="foldingbutton" id="test000024_foldlink" onclick="toggle_child_visibility('test000024');" style="display: block;">+</div>
+<span class="not_run">TEST&nbsp;CASE: </span>
+<a class="name" name="test_Cream Test Suite.Sandbox Staging" title="Cream Test Suite.Sandbox Staging">Sandbox Staging</a>
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="test000024_children" style="display: none;">
+<table class="metadata">
+<tr><th>Full Name:</th><td>Cream Test Suite.Sandbox Staging</td></tr>
+<tr><th>Documentation:</th><td>This test case tests the two different Sandbox staging operations available for the /etc/glite-ce-cream/cream-config.xml, LRMS and GSIFTP. The test case has the following logic:<br />
+1) Change the setting (if GSIFTP, set to LRMS, if LRMS, set to GSIFTP)<br />
+2) Run the osb_localhost test case (it uses input and output sandboxes)<br />
+3) Reset the setting to its original and rerun the osb_localhost test case.</td></tr>
+<tr><th>Tags:</th><td>sb_stage</td></tr>
+</table>
+<table class="keyword" id="kw000302">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000302_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000303">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000303_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000304">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000304_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000305">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000305_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000306">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000306_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000307">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000307_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000308">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000308_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000309">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000309_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000310">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000310_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000311">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000311_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000312">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000312_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000313">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000313_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000314">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000314_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000315">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000315_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000316">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000316_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000317">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000317_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000318">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000318_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000319">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000319_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000320">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000320_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000321">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000321_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000322">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000322_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000323">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000323_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000324">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000324_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000325">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000325_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000326">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000326_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000327">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000327_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000328">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000328_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000329">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000329_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000330">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000330_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000331">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000331_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000332">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000332_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000333">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000333_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000334">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000334_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000335">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000335_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000336">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000336_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000337">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000337_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000338">
+<tr>
+<td>
+
+
+<span class="arg"></span>
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000338_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="test" id="test000025">
+<tr>
+<td>
+<div class="foldingbutton" id="test000025_unfoldlink" onclick="toggle_child_visibility('test000025');" style="display: none;">-</div>
+<div class="foldingbutton" id="test000025_foldlink" onclick="toggle_child_visibility('test000025');" style="display: block;">+</div>
+<span class="not_run">TEST&nbsp;CASE: </span>
+<a class="name" name="test_Cream Test Suite.Validate Glue Schema" title="Cream Test Suite.Validate Glue Schema">Validate Glue Schema</a>
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="test000025_children" style="display: none;">
+<table class="metadata">
+<tr><th>Full Name:</th><td>Cream Test Suite.Validate Glue Schema</td></tr>
+<tr><th>Documentation:</th><td>Run the glue validator on the cream host.<br />
+The following two cases are tested:<br />
+1) o=grid glue1<br />
+2) o=glue glue2</td></tr>
+<tr><th>Tags:</th><td>glue</td></tr>
+</table>
+<table class="keyword" id="kw000339">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000339_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000340">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000340_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000341">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000341_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000342">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000342_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000343">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000343_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000344">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000344_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="test" id="test000026">
+<tr>
+<td>
+<div class="foldingbutton" id="test000026_unfoldlink" onclick="toggle_child_visibility('test000026');" style="display: none;">-</div>
+<div class="foldingbutton" id="test000026_foldlink" onclick="toggle_child_visibility('test000026');" style="display: block;">+</div>
+<span class="not_run">TEST&nbsp;CASE: </span>
+<a class="name" name="test_Cream Test Suite.Automatic Proxy Purging" title="Cream Test Suite.Automatic Proxy Purging">Automatic Proxy Purging</a>
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="test000026_children" style="display: none;">
+<table class="metadata">
+<tr><th>Full Name:</th><td>Cream Test Suite.Automatic Proxy Purging</td></tr>
+<tr><th>Documentation:</th><td>This test case checks the automatic proxy purging functionality. Test case algorithm:<br />
+1) Modify the cream config xml file to set the delegation purge rate to value 1<br />
+2) Submit a simple job and wait for it to finish<br />
+3) Read the delegation id info from the CREAM service's delegation endpoint (before the purger runs)<br />
+4) List the proxy in the job's sandbox (before the purger runs)<br />
+5) Wait 6 minutes for the purger to run<br />
+6) Read the delegation ids info from the CREAM service's delegation endpoint (the purger now has ran)<br />
+7) List the proxy in the job's sandbox (the purger now has ran)<br />
+8) Reset the cream config xml to its original value<br />
+9) Check that the info about the delegation id is valid before the purger has ran and it isn't in storage after the purger has ran.<br />
+10) Check tha the delegation id of the job exists in the contents of the job's sandbox before the purger ran and doesn't exist after the purger ran</td></tr>
+<tr><th>Tags:</th><td>proxy_purge</td></tr>
+</table>
+<table class="keyword" id="kw000345">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000345_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000346">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000346_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000347">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000347_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000348">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000348_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000349">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000349_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000350">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000350_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000351">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000351_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000352">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000352_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000353">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000353_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000354">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000354_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000355">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000355_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000356">
+<tr>
+<td>
+
+
+<span class="arg"></span>
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000356_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="test" id="test000027">
+<tr>
+<td>
+<div class="foldingbutton" id="test000027_unfoldlink" onclick="toggle_child_visibility('test000027');" style="display: none;">-</div>
+<div class="foldingbutton" id="test000027_foldlink" onclick="toggle_child_visibility('test000027');" style="display: block;">+</div>
+<span class="not_run">TEST&nbsp;CASE: </span>
+<a class="name" name="test_Cream Test Suite.Verify Job Status Output" title="Cream Test Suite.Verify Job Status Output">Verify Job Status Output</a>
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="test000027_children" style="display: none;">
+<table class="metadata">
+<tr><th>Full Name:</th><td>Cream Test Suite.Verify Job Status Output</td></tr>
+<tr><th>Documentation:</th><td>This test is checking the output of the glite-ce-job-status command. It uses the following status cases:<br />
+1) verbosity 0<br />
+2) verbosity 1<br />
+3) verbosity 2<br />
+4) use the "from" filter<br />
+5) use the "from" and "to" filters<br />
+6) use the "to" filter<br />
+7) use the "status" filter<br />
+For this test it is crucial that the ce host, the ui host and the testing host are time-synced.<br />
+If the aren't synced, most probably this test case will fail when checking the "from" and "to" filters.</td></tr>
+<tr><th>Tags:</th><td>status</td></tr>
+</table>
+<table class="keyword" id="kw000357">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000357_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000358">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000358_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000359">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000359_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000360">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000360_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000361">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000361_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000362">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000362_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000363">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000363_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000364">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000364_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000365">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000365_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000366">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000366_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000367">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000367_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000368">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000368_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000369">
+<tr>
+<td>
+
+
+<span class="arg"></span>
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000369_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000370">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000370_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000371">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000371_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000372">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000372_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000373">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000373_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000374">
+<tr>
+<td>
+
+
+<span class="arg"></span>
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000374_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000375">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000375_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000376">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000376_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000377">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000377_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000378">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000378_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000379">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000379_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000380">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000380_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000381">
+<tr>
+<td>
+
+
+<span class="arg"></span>
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000381_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="test" id="test000028">
+<tr>
+<td>
+<div class="foldingbutton" id="test000028_unfoldlink" onclick="toggle_child_visibility('test000028');" style="display: none;">-</div>
+<div class="foldingbutton" id="test000028_foldlink" onclick="toggle_child_visibility('test000028');" style="display: block;">+</div>
+<span class="not_run">TEST&nbsp;CASE: </span>
+<a class="name" name="test_Cream Test Suite.OutputData" title="Cream Test Suite.OutputData">OutputData</a>
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="test000028_children" style="display: none;">
+<table class="metadata">
+<tr><th>Full Name:</th><td>Cream Test Suite.OutputData</td></tr>
+<tr><th>Documentation:</th><td>This test case tests the OutputData jdl attribute. The testing algorithm is the following:<br />
+1) Create and submit three jdls containing the output data attribute, in three different combinations (simple, with gridftp server, with gridftp server and lfn directory)<br />
+2) Check the final status of those jobs, which should be DONE-OK<br />
+3) Gather the output DSUpload files for each job and extract from them the relevant guids of the uploaded files<br />
+4) Download the uploaded files and check that they are not empty<br />
+<br />
+Note: The jdl is executing a simple script which runs "/bin/uname -a" and stores its output in a text file "script_output.txt"</td></tr>
+<tr><th>Tags:</th><td>outputdata</td></tr>
+</table>
+<table class="keyword" id="kw000382">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000382_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000383">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000383_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000384">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000384_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000385">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000385_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000386">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000386_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000387">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000387_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000388">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000388_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000389">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000389_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000390">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000390_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000391">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000391_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000392">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000392_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000393">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000393_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000394">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000394_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000395">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000395_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000396">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000396_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000397">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000397_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000398">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000398_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000399">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000399_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000400">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000400_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000401">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000401_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000402">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000402_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000403">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000403_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000404">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000404_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000405">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000405_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000406">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000406_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000407">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000407_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000408">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000408_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000409">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000409_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000410">
+<tr>
+<td>
+
+
+<span class="arg"></span>
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000410_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="test" id="test000029">
+<tr>
+<td>
+<div class="foldingbutton" id="test000029_unfoldlink" onclick="toggle_child_visibility('test000029');" style="display: none;">-</div>
+<div class="foldingbutton" id="test000029_foldlink" onclick="toggle_child_visibility('test000029');" style="display: block;">+</div>
+<span class="not_run">TEST&nbsp;CASE: </span>
+<a class="name" name="test_Cream Test Suite.Automatic Job Purge" title="Cream Test Suite.Automatic Job Purge">Automatic Job Purge</a>
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="test000029_children" style="display: none;">
+<table class="metadata">
+<tr><th>Full Name:</th><td>Cream Test Suite.Automatic Job Purge</td></tr>
+<tr><th>Documentation:</th><td>This test case is testing the functionality of the JobDBAdminPurger script. Test case algo:<br />
+1) Submit a job<br />
+2) Wait for it to finish<br />
+3) Purge it with the use of the JobDBAdmin purger script<br />
+4) Do an uberftp ls operation on its sandbox dir (which should fail)<br />
+5) Do a status request operation (glite-ce-job-status, which should fail)</td></tr>
+<tr><th>Tags:</th><td>auto_job_purge</td></tr>
+</table>
+<table class="keyword" id="kw000411">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000411_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000412">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000412_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000413">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000413_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000414">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000414_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000415">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000415_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000416">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000416_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000417">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000417_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000418">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000418_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000419">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000419_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000420">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000420_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000421">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000421_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000422">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000422_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000423">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000423_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000424">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000424_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000425">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000425_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000426">
+<tr>
+<td>
+
+
+<span class="arg"></span>
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000426_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="test" id="test000030">
+<tr>
+<td>
+<div class="foldingbutton" id="test000030_unfoldlink" onclick="toggle_child_visibility('test000030');" style="display: none;">-</div>
+<div class="foldingbutton" id="test000030_foldlink" onclick="toggle_child_visibility('test000030');" style="display: block;">+</div>
+<span class="not_run">TEST&nbsp;CASE: </span>
+<a class="name" name="test_Cream Test Suite.Proxy Renewal" title="Cream Test Suite.Proxy Renewal">Proxy Renewal</a>
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="test000030_children" style="display: none;">
+<table class="metadata">
+<tr><th>Full Name:</th><td>Cream Test Suite.Proxy Renewal</td></tr>
+<tr><th>Documentation:</th><td>Submit a job lasting 20 minutes using a proxy valid for 10 minutes.<br />
+After 5 minutes renew the proxy with the glite-ce-proxy-renew command.<br />
+Verify the final job status which should eventually be DONE-OK</td></tr>
+<tr><th>Tags:</th><td>renew</td></tr>
+</table>
+<table class="keyword" id="kw000427">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000427_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000428">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000428_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000429">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000429_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000430">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000430_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000431">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000431_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000432">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000432_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000433">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000433_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000434">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000434_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000435">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000435_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000436">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000436_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000437">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000437_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000438">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000438_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000439">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000439_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000440">
+<tr>
+<td>
+
+
+<span class="arg"></span>
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000440_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="test" id="test000031">
+<tr>
+<td>
+<div class="foldingbutton" id="test000031_unfoldlink" onclick="toggle_child_visibility('test000031');" style="display: none;">-</div>
+<div class="foldingbutton" id="test000031_foldlink" onclick="toggle_child_visibility('test000031');" style="display: block;">+</div>
+<span class="not_run">TEST&nbsp;CASE: </span>
+<a class="name" name="test_Cream Test Suite.CPU Allocation 1" title="Cream Test Suite.CPU Allocation 1">CPU Allocation 1</a>
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="test000031_children" style="display: none;">
+<table class="metadata">
+<tr><th>Full Name:</th><td>Cream Test Suite.CPU Allocation 1</td></tr>
+<tr><th>Documentation:</th><td>Validate the contents of the batch job submission script, according to: <a href="https://wiki.italiangrid.it/twiki/bin/view/CREAM/CreamTestWorkPlan">https://wiki.italiangrid.it/twiki/bin/view/CREAM/CreamTestWorkPlan</a> cpu allocation test specifications. Per test information follows:<br />
+Wherever it appears,S is the value published as GlueHostArchitectureSMPSize<br />
+Test type 1<br />
+Jdl Attributes: WholeNodes=true SMPGranularity=G HostNumber=H, H&gt;1<br />
+Verification for LSF: BSUB -n S*H, BSUB -R "span[ptile=S]", BSUB -x<br />
+Verification for PBS: PBS -l nodes=H:ppn=S, PBS -W x=NACCESSPOLICY:SINGLEJOB<br />
+Test type 2<br />
+JDL Attributes: WholeNodes=true SMPGranularity=G<br />
+Verification for LSF: BSUB -n S, BSUB -R "span[jpsts=1]", BSUB -x<br />
+Verification for PBS: PBS -l nodes=1:ppn=S, PBS -W x=NACCESSPOLICY:SINGLEJOB<br />
+Test type 3<br />
+JDL Attributes: WholeNodes=true, HostNumber=H<br />
+Verification for LSF: BSUB -n S*H, BSUB -R "span[ptiles=S]", BSUB -x<br />
+Verification for PBS: PBS -l nodes=H:ppn=S, PBS -W x=NACCESSPOLICY:SINGLEJOB<br />
+Test type 4<br />
+JDL Attributes: WholeNodes=false, SMPGranularity=G, CPUNumber=C<br />
+Verification for LSF: BSUB -n C, BSUB -R "span[ptile=G]"<br />
+Verification for PBS: PBS -l nodes=N:ppn=G { [+1:ppn=R] if r&gt;0 }<br />
+Test type 5<br />
+JDL Attributes: WholeNodes=false, HostNumber=H, CPUNumber=C, H&gt;1<br />
+Verification for LSF: BSUB -n C, BSUB -R "span[ptile={ N if R=0 ; N+1 if R&gt;0 }]"<br />
+Verification for PBS: PBS -l nodes=H-R:ppn=N { [+R:ppn=N+1] if R&gt;0 }<br />
+Test type 6<br />
+JDL Attributes: WholeNodes=false, CPUNumber=C<br />
+Verification for LSF: BSUB -n C<br />
+Verification for PBS: PBS -L nodes=C</td></tr>
+<tr><th>Tags:</th><td>cpu_alloc, cpu_alloc1</td></tr>
+</table>
+<table class="keyword" id="kw000441">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000441_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000442">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000442_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000443">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000443_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000444">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000444_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000445">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000445_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000446">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000446_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000447">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000447_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000448">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000448_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000449">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000449_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000450">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000450_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000451">
+<tr>
+<td>
+
+
+<span class="arg"></span>
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000451_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="test" id="test000032">
+<tr>
+<td>
+<div class="foldingbutton" id="test000032_unfoldlink" onclick="toggle_child_visibility('test000032');" style="display: none;">-</div>
+<div class="foldingbutton" id="test000032_foldlink" onclick="toggle_child_visibility('test000032');" style="display: block;">+</div>
+<span class="not_run">TEST&nbsp;CASE: </span>
+<a class="name" name="test_Cream Test Suite.CPU Allocation 2" title="Cream Test Suite.CPU Allocation 2">CPU Allocation 2</a>
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="test000032_children" style="display: none;">
+<table class="metadata">
+<tr><th>Full Name:</th><td>Cream Test Suite.CPU Allocation 2</td></tr>
+<tr><th>Documentation:</th><td>Validate the contents of the batch job submission script, according to: <a href="https://wiki.italiangrid.it/twiki/bin/view/CREAM/CreamTestWorkPlan">https://wiki.italiangrid.it/twiki/bin/view/CREAM/CreamTestWorkPlan</a> cpu allocation test specifications. Per test information follows:<br />
+Wherever it appears,S is the value published as GlueHostArchitectureSMPSize<br />
+Test type 1<br />
+Jdl Attributes: WholeNodes=true SMPGranularity=G HostNumber=H, H&gt;1<br />
+Verification for LSF: BSUB -n S*H, BSUB -R "span[ptile=S]", BSUB -x<br />
+Verification for PBS: PBS -l nodes=H:ppn=S, PBS -W x=NACCESSPOLICY:SINGLEJOB<br />
+Test type 2<br />
+JDL Attributes: WholeNodes=true SMPGranularity=G<br />
+Verification for LSF: BSUB -n S, BSUB -R "span[jpsts=1]", BSUB -x<br />
+Verification for PBS: PBS -l nodes=1:ppn=S, PBS -W x=NACCESSPOLICY:SINGLEJOB<br />
+Test type 3<br />
+JDL Attributes: WholeNodes=true, HostNumber=H<br />
+Verification for LSF: BSUB -n S*H, BSUB -R "span[ptiles=S]", BSUB -x<br />
+Verification for PBS: PBS -l nodes=H:ppn=S, PBS -W x=NACCESSPOLICY:SINGLEJOB<br />
+Test type 4<br />
+JDL Attributes: WholeNodes=false, SMPGranularity=G, CPUNumber=C<br />
+Verification for LSF: BSUB -n C, BSUB -R "span[ptile=G]"<br />
+Verification for PBS: PBS -l nodes=N:ppn=G { [+1:ppn=R] if r&gt;0 }<br />
+Test type 5<br />
+JDL Attributes: WholeNodes=false, HostNumber=H, CPUNumber=C, H&gt;1<br />
+Verification for LSF: BSUB -n C, BSUB -R "span[ptile={ N if R=0 ; N+1 if R&gt;0 }]"<br />
+Verification for PBS: PBS -l nodes=H-R:ppn=N { [+R:ppn=N+1] if R&gt;0 }<br />
+Test type 6<br />
+JDL Attributes: WholeNodes=false, CPUNumber=C<br />
+Verification for LSF: BSUB -n C<br />
+Verification for PBS: PBS -L nodes=C</td></tr>
+<tr><th>Tags:</th><td>cpu_alloc, cpu_alloc2</td></tr>
+</table>
+<table class="keyword" id="kw000452">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000452_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000453">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000453_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000454">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000454_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000455">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000455_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000456">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000456_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000457">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000457_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000458">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000458_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000459">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000459_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000460">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000460_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000461">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000461_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000462">
+<tr>
+<td>
+
+
+<span class="arg"></span>
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000462_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="test" id="test000033">
+<tr>
+<td>
+<div class="foldingbutton" id="test000033_unfoldlink" onclick="toggle_child_visibility('test000033');" style="display: none;">-</div>
+<div class="foldingbutton" id="test000033_foldlink" onclick="toggle_child_visibility('test000033');" style="display: block;">+</div>
+<span class="not_run">TEST&nbsp;CASE: </span>
+<a class="name" name="test_Cream Test Suite.CPU Allocation 3" title="Cream Test Suite.CPU Allocation 3">CPU Allocation 3</a>
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="test000033_children" style="display: none;">
+<table class="metadata">
+<tr><th>Full Name:</th><td>Cream Test Suite.CPU Allocation 3</td></tr>
+<tr><th>Documentation:</th><td>Validate the contents of the batch job submission script, according to: <a href="https://wiki.italiangrid.it/twiki/bin/view/CREAM/CreamTestWorkPlan">https://wiki.italiangrid.it/twiki/bin/view/CREAM/CreamTestWorkPlan</a> cpu allocation test specifications. Per test information follows:<br />
+Wherever it appears,S is the value published as GlueHostArchitectureSMPSize<br />
+Test type 1<br />
+Jdl Attributes: WholeNodes=true SMPGranularity=G HostNumber=H, H&gt;1<br />
+Verification for LSF: BSUB -n S*H, BSUB -R "span[ptile=S]", BSUB -x<br />
+Verification for PBS: PBS -l nodes=H:ppn=S, PBS -W x=NACCESSPOLICY:SINGLEJOB<br />
+Test type 2<br />
+JDL Attributes: WholeNodes=true SMPGranularity=G<br />
+Verification for LSF: BSUB -n S, BSUB -R "span[jpsts=1]", BSUB -x<br />
+Verification for PBS: PBS -l nodes=1:ppn=S, PBS -W x=NACCESSPOLICY:SINGLEJOB<br />
+Test type 3<br />
+JDL Attributes: WholeNodes=true, HostNumber=H<br />
+Verification for LSF: BSUB -n S*H, BSUB -R "span[ptiles=S]", BSUB -x<br />
+Verification for PBS: PBS -l nodes=H:ppn=S, PBS -W x=NACCESSPOLICY:SINGLEJOB<br />
+Test type 4<br />
+JDL Attributes: WholeNodes=false, SMPGranularity=G, CPUNumber=C<br />
+Verification for LSF: BSUB -n C, BSUB -R "span[ptile=G]"<br />
+Verification for PBS: PBS -l nodes=N:ppn=G { [+1:ppn=R] if r&gt;0 }<br />
+Test type 5<br />
+JDL Attributes: WholeNodes=false, HostNumber=H, CPUNumber=C, H&gt;1<br />
+Verification for LSF: BSUB -n C, BSUB -R "span[ptile={ N if R=0 ; N+1 if R&gt;0 }]"<br />
+Verification for PBS: PBS -l nodes=H-R:ppn=N { [+R:ppn=N+1] if R&gt;0 }<br />
+Test type 6<br />
+JDL Attributes: WholeNodes=false, CPUNumber=C<br />
+Verification for LSF: BSUB -n C<br />
+Verification for PBS: PBS -L nodes=C</td></tr>
+<tr><th>Tags:</th><td>cpu_alloc, cpu_alloc3</td></tr>
+</table>
+<table class="keyword" id="kw000463">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000463_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000464">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000464_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000465">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000465_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000466">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000466_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000467">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000467_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000468">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000468_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000469">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000469_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000470">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000470_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000471">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000471_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000472">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000472_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000473">
+<tr>
+<td>
+
+
+<span class="arg"></span>
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000473_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="test" id="test000034">
+<tr>
+<td>
+<div class="foldingbutton" id="test000034_unfoldlink" onclick="toggle_child_visibility('test000034');" style="display: none;">-</div>
+<div class="foldingbutton" id="test000034_foldlink" onclick="toggle_child_visibility('test000034');" style="display: block;">+</div>
+<span class="not_run">TEST&nbsp;CASE: </span>
+<a class="name" name="test_Cream Test Suite.CPU Allocation 4" title="Cream Test Suite.CPU Allocation 4">CPU Allocation 4</a>
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="test000034_children" style="display: none;">
+<table class="metadata">
+<tr><th>Full Name:</th><td>Cream Test Suite.CPU Allocation 4</td></tr>
+<tr><th>Documentation:</th><td>Validate the contents of the batch job submission script, according to: <a href="https://wiki.italiangrid.it/twiki/bin/view/CREAM/CreamTestWorkPlan">https://wiki.italiangrid.it/twiki/bin/view/CREAM/CreamTestWorkPlan</a> cpu allocation test specifications. Per test information follows:<br />
+Wherever it appears,S is the value published as GlueHostArchitectureSMPSize<br />
+Test type 1<br />
+Jdl Attributes: WholeNodes=true SMPGranularity=G HostNumber=H, H&gt;1<br />
+Verification for LSF: BSUB -n S*H, BSUB -R "span[ptile=S]", BSUB -x<br />
+Verification for PBS: PBS -l nodes=H:ppn=S, PBS -W x=NACCESSPOLICY:SINGLEJOB<br />
+Test type 2<br />
+JDL Attributes: WholeNodes=true SMPGranularity=G<br />
+Verification for LSF: BSUB -n S, BSUB -R "span[jpsts=1]", BSUB -x<br />
+Verification for PBS: PBS -l nodes=1:ppn=S, PBS -W x=NACCESSPOLICY:SINGLEJOB<br />
+Test type 3<br />
+JDL Attributes: WholeNodes=true, HostNumber=H<br />
+Verification for LSF: BSUB -n S*H, BSUB -R "span[ptiles=S]", BSUB -x<br />
+Verification for PBS: PBS -l nodes=H:ppn=S, PBS -W x=NACCESSPOLICY:SINGLEJOB<br />
+Test type 4<br />
+JDL Attributes: WholeNodes=false, SMPGranularity=G, CPUNumber=C<br />
+Verification for LSF: BSUB -n C, BSUB -R "span[ptile=G]"<br />
+Verification for PBS: PBS -l nodes=N:ppn=G { [+1:ppn=R] if r&gt;0 }<br />
+Test type 5<br />
+JDL Attributes: WholeNodes=false, HostNumber=H, CPUNumber=C, H&gt;1<br />
+Verification for LSF: BSUB -n C, BSUB -R "span[ptile={ N if R=0 ; N+1 if R&gt;0 }]"<br />
+Verification for PBS: PBS -l nodes=H-R:ppn=N { [+R:ppn=N+1] if R&gt;0 }<br />
+Test type 6<br />
+JDL Attributes: WholeNodes=false, CPUNumber=C<br />
+Verification for LSF: BSUB -n C<br />
+Verification for PBS: PBS -L nodes=C</td></tr>
+<tr><th>Tags:</th><td>cpu_alloc, cpu_alloc4</td></tr>
+</table>
+<table class="keyword" id="kw000474">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000474_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000475">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000475_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000476">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000476_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000477">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000477_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000478">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000478_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000479">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000479_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000480">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000480_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000481">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000481_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000482">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000482_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000483">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000483_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000484">
+<tr>
+<td>
+
+
+<span class="arg"></span>
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000484_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="test" id="test000035">
+<tr>
+<td>
+<div class="foldingbutton" id="test000035_unfoldlink" onclick="toggle_child_visibility('test000035');" style="display: none;">-</div>
+<div class="foldingbutton" id="test000035_foldlink" onclick="toggle_child_visibility('test000035');" style="display: block;">+</div>
+<span class="not_run">TEST&nbsp;CASE: </span>
+<a class="name" name="test_Cream Test Suite.CPU Allocation 5" title="Cream Test Suite.CPU Allocation 5">CPU Allocation 5</a>
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="test000035_children" style="display: none;">
+<table class="metadata">
+<tr><th>Full Name:</th><td>Cream Test Suite.CPU Allocation 5</td></tr>
+<tr><th>Documentation:</th><td>Validate the contents of the batch job submission script, according to: <a href="https://wiki.italiangrid.it/twiki/bin/view/CREAM/CreamTestWorkPlan">https://wiki.italiangrid.it/twiki/bin/view/CREAM/CreamTestWorkPlan</a> cpu allocation test specifications. Per test information follows:<br />
+Wherever it appears,S is the value published as GlueHostArchitectureSMPSize<br />
+Test type 1<br />
+Jdl Attributes: WholeNodes=true SMPGranularity=G HostNumber=H, H&gt;1<br />
+Verification for LSF: BSUB -n S*H, BSUB -R "span[ptile=S]", BSUB -x<br />
+Verification for PBS: PBS -l nodes=H:ppn=S, PBS -W x=NACCESSPOLICY:SINGLEJOB<br />
+Test type 2<br />
+JDL Attributes: WholeNodes=true SMPGranularity=G<br />
+Verification for LSF: BSUB -n S, BSUB -R "span[jpsts=1]", BSUB -x<br />
+Verification for PBS: PBS -l nodes=1:ppn=S, PBS -W x=NACCESSPOLICY:SINGLEJOB<br />
+Test type 3<br />
+JDL Attributes: WholeNodes=true, HostNumber=H<br />
+Verification for LSF: BSUB -n S*H, BSUB -R "span[ptiles=S]", BSUB -x<br />
+Verification for PBS: PBS -l nodes=H:ppn=S, PBS -W x=NACCESSPOLICY:SINGLEJOB<br />
+Test type 4<br />
+JDL Attributes: WholeNodes=false, SMPGranularity=G, CPUNumber=C<br />
+Verification for LSF: BSUB -n C, BSUB -R "span[ptile=G]"<br />
+Verification for PBS: PBS -l nodes=N:ppn=G { [+1:ppn=R] if r&gt;0 }<br />
+Test type 5<br />
+JDL Attributes: WholeNodes=false, HostNumber=H, CPUNumber=C, H&gt;1<br />
+Verification for LSF: BSUB -n C, BSUB -R "span[ptile={ N if R=0 ; N+1 if R&gt;0 }]"<br />
+Verification for PBS: PBS -l nodes=H-R:ppn=N { [+R:ppn=N+1] if R&gt;0 }<br />
+Test type 6<br />
+JDL Attributes: WholeNodes=false, CPUNumber=C<br />
+Verification for LSF: BSUB -n C<br />
+Verification for PBS: PBS -L nodes=C</td></tr>
+<tr><th>Tags:</th><td>cpu_alloc, cpu_alloc5</td></tr>
+</table>
+<table class="keyword" id="kw000485">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000485_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000486">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000486_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000487">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000487_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000488">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000488_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000489">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000489_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000490">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000490_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000491">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000491_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000492">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000492_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000493">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000493_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000494">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000494_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000495">
+<tr>
+<td>
+
+
+<span class="arg"></span>
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000495_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="test" id="test000036">
+<tr>
+<td>
+<div class="foldingbutton" id="test000036_unfoldlink" onclick="toggle_child_visibility('test000036');" style="display: none;">-</div>
+<div class="foldingbutton" id="test000036_foldlink" onclick="toggle_child_visibility('test000036');" style="display: block;">+</div>
+<span class="not_run">TEST&nbsp;CASE: </span>
+<a class="name" name="test_Cream Test Suite.CPU Allocation 6" title="Cream Test Suite.CPU Allocation 6">CPU Allocation 6</a>
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="test000036_children" style="display: none;">
+<table class="metadata">
+<tr><th>Full Name:</th><td>Cream Test Suite.CPU Allocation 6</td></tr>
+<tr><th>Documentation:</th><td>Validate the contents of the batch job submission script, according to: <a href="https://wiki.italiangrid.it/twiki/bin/view/CREAM/CreamTestWorkPlan">https://wiki.italiangrid.it/twiki/bin/view/CREAM/CreamTestWorkPlan</a> cpu allocation test specifications. Per test information follows:<br />
+Wherever it appears,S is the value published as GlueHostArchitectureSMPSize<br />
+Test type 1<br />
+Jdl Attributes: WholeNodes=true SMPGranularity=G HostNumber=H, H&gt;1<br />
+Verification for LSF: BSUB -n S*H, BSUB -R "span[ptile=S]", BSUB -x<br />
+Verification for PBS: PBS -l nodes=H:ppn=S, PBS -W x=NACCESSPOLICY:SINGLEJOB<br />
+Test type 2<br />
+JDL Attributes: WholeNodes=true SMPGranularity=G<br />
+Verification for LSF: BSUB -n S, BSUB -R "span[jpsts=1]", BSUB -x<br />
+Verification for PBS: PBS -l nodes=1:ppn=S, PBS -W x=NACCESSPOLICY:SINGLEJOB<br />
+Test type 3<br />
+JDL Attributes: WholeNodes=true, HostNumber=H<br />
+Verification for LSF: BSUB -n S*H, BSUB -R "span[ptiles=S]", BSUB -x<br />
+Verification for PBS: PBS -l nodes=H:ppn=S, PBS -W x=NACCESSPOLICY:SINGLEJOB<br />
+Test type 4<br />
+JDL Attributes: WholeNodes=false, SMPGranularity=G, CPUNumber=C<br />
+Verification for LSF: BSUB -n C, BSUB -R "span[ptile=G]"<br />
+Verification for PBS: PBS -l nodes=N:ppn=G { [+1:ppn=R] if r&gt;0 }<br />
+Test type 5<br />
+JDL Attributes: WholeNodes=false, HostNumber=H, CPUNumber=C, H&gt;1<br />
+Verification for LSF: BSUB -n C, BSUB -R "span[ptile={ N if R=0 ; N+1 if R&gt;0 }]"<br />
+Verification for PBS: PBS -l nodes=H-R:ppn=N { [+R:ppn=N+1] if R&gt;0 }<br />
+Test type 6<br />
+JDL Attributes: WholeNodes=false, CPUNumber=C<br />
+Verification for LSF: BSUB -n C<br />
+Verification for PBS: PBS -L nodes=C</td></tr>
+<tr><th>Tags:</th><td>cpu_alloc, cpu_alloc6</td></tr>
+</table>
+<table class="keyword" id="kw000496">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000496_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000497">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000497_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000498">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000498_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000499">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000499_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000500">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000500_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000501">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000501_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000502">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000502_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000503">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000503_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000504">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000504_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000505">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000505_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000506">
+<tr>
+<td>
+
+
+<span class="arg"></span>
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000506_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="test" id="test000037">
+<tr>
+<td>
+<div class="foldingbutton" id="test000037_unfoldlink" onclick="toggle_child_visibility('test000037');" style="display: none;">-</div>
+<div class="foldingbutton" id="test000037_foldlink" onclick="toggle_child_visibility('test000037');" style="display: block;">+</div>
+<span class="not_run">TEST&nbsp;CASE: </span>
+<a class="name" name="test_Cream Test Suite.Resource BDII" title="Cream Test Suite.Resource BDII">Resource BDII</a>
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="test000037_children" style="display: none;">
+<table class="metadata">
+<tr><th>Full Name:</th><td>Cream Test Suite.Resource BDII</td></tr>
+<tr><th>Documentation:</th><td>Check if the resource bdii publishes all the relevant objectclasses for both glue1 and glue2.</td></tr>
+<tr><th>Tags:</th><td>bdii</td></tr>
+</table>
+<table class="keyword" id="kw000507">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000507_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000508">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000508_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000509">
+<tr>
+<td>
+
+
+<span class="arg"></span>
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000509_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000510">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000510_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000511">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000511_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000512">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000512_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000513">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000513_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000514">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000514_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000515">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000515_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000516">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000516_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000517">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000517_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000518">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000518_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000519">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000519_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000520">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000520_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000521">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000521_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000522">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000522_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000523">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000523_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000524">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000524_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000525">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000525_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000526">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000526_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000527">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000527_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000528">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000528_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000529">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000529_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000530">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000530_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="test" id="test000038">
+<tr>
+<td>
+<div class="foldingbutton" id="test000038_unfoldlink" onclick="toggle_child_visibility('test000038');" style="display: none;">-</div>
+<div class="foldingbutton" id="test000038_foldlink" onclick="toggle_child_visibility('test000038');" style="display: block;">+</div>
+<span class="not_run">TEST&nbsp;CASE: </span>
+<a class="name" name="test_Cream Test Suite.Logging and Bookkeeping" title="Cream Test Suite.Logging and Bookkeeping">Logging and Bookkeeping</a>
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="test000038_children" style="display: none;">
+<table class="metadata">
+<tr><th>Full Name:</th><td>Cream Test Suite.Logging and Bookkeeping</td></tr>
+<tr><th>Documentation:</th><td>Check if the logging and bookkeeping service reports 3 events sourcing from LRMS.</td></tr>
+<tr><th>Tags:</th><td>lb</td></tr>
+</table>
+<table class="keyword" id="kw000531">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000531_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000532">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000532_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000533">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000533_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000534">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000534_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000535">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000535_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000536">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000536_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000537">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000537_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000538">
+<tr>
+<td>
+
+
+<span class="arg"></span>
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000538_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="test" id="test000039">
+<tr>
+<td>
+<div class="foldingbutton" id="test000039_unfoldlink" onclick="toggle_child_visibility('test000039');" style="display: none;">-</div>
+<div class="foldingbutton" id="test000039_foldlink" onclick="toggle_child_visibility('test000039');" style="display: block;">+</div>
+<span class="not_run">TEST&nbsp;CASE: </span>
+<a class="name" name="test_Cream Test Suite.Old BLParser Restart" title="Cream Test Suite.Old BLParser Restart">Old BLParser Restart</a>
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="test000039_children" style="display: none;">
+<table class="metadata">
+<tr><th>Full Name:</th><td>Cream Test Suite.Old BLParser Restart</td></tr>
+<tr><th>Documentation:</th><td>Configure a CREAM CE using the old blah blparser. Stop the blparser and after a few seconds (e.g. 10) restart it. Wait for 2 minute and try a job submission. The job should run and complete properly.</td></tr>
+<tr><th>Tags:</th><td>old_blah</td></tr>
+</table>
+<table class="keyword" id="kw000539">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000539_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000540">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000540_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000541">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000541_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000542">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000542_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000543">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000543_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000544">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000544_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000545">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000545_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000546">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000546_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000547">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000547_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000548">
+<tr>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000548_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="keyword" id="kw000549">
+<tr>
+<td>
+
+
+<span class="arg"></span>
+</td>
+</tr>
+<tr>
+<td>
+<div class="indent" id="kw000549_children" style="display: none;">
+<table class="metadata">
+</table>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+</table>
+</body>
+</html>

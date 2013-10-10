@@ -1,0 +1,4043 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>cream_testing</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style media="all" type="text/css">
+body {
+  background: white;
+  color: black;
+  font-size: small;
+  font-family: sans-serif;
+  padding: 0.1em 0.5em;
+}
+a.name, span.name {
+  font-style: italic;
+}
+a, a:link, a:visited {
+  color: #c30;
+}
+a:hover, a:active {
+  text-decoration: underline;
+  color: black;
+}
+div.shortcuts {
+  margin: 1em 0em;
+  font-size: 0.9em;
+}
+div.shortcuts a {
+  text-decoration: none;
+  color: black;
+}
+div.shortcuts a:hover {
+  text-decoration: underline;
+}
+table.keywords {
+  border: 2px solid black;
+  border-collapse: collapse;
+  empty-cells: show;
+  margin: 0.3em 0em;
+  width: 100%;
+}
+table.keywords th, table.keywords td {
+  border: 2px solid black;
+  padding: 0.2em;
+  vertical-align: top;
+}
+table.keywords th {
+  background: #bbb;
+  color: black;
+}
+table.keywords td.kw {
+  width: 150px;
+  font-weight: bold;
+}
+table.keywords td.arg {
+  width: 300px;
+  font-style: italic;
+}
+table.doc {
+  border: 0px solid black;
+  background: transparent;
+  border-collapse: collapse;
+  empty-cells: show;
+  font-size=1.2em;
+}
+table.doc td {
+  border: 0px solid black;
+  padding: 0.1em 0.3em;
+  height: 1.2em;
+}
+#footer {
+  font-size: 0.9em;
+}
+</style>
+<style media="print" type="text/css">
+body {
+  margin: 0px 1px;
+  padding: 0px;
+  font-size: 10px;
+}
+a {
+  text-decoration: none;
+}
+</style>
+</head>
+<body>
+<h1>Cream Testing</h1>
+
+
+<h2>Shortcuts</h2>
+<div class='shortcuts'>
+<a href="#Allowed Submission" title="|  Description:   |  Return the output of the glite-ce-allowed-submission command  | ">Allowed&nbsp;Submission</a>
+&nbsp;&middot;&nbsp;
+<a href="#Ban User Argus" title="|  Description: |   Ban the specified DN using pap-admin cli on the argus host                              | ">Ban&nbsp;User&nbsp;Argus</a>
+&nbsp;&middot;&nbsp;
+<a href="#Ban User Gjaf" title="|  Description: |   Add the specified DN as a CREAM banned user (add it to /etc/lcas/ban_users.db)          | ">Ban&nbsp;User&nbsp;Gjaf</a>
+&nbsp;&middot;&nbsp;
+<a href="#Bkill Job" title="|  Description: |   Manually bkill a job.                                                                       | ">Bkill&nbsp;Job</a>
+&nbsp;&middot;&nbsp;
+<a href="#Cancel All Jobs" title="|  Description:  |  Cancel all the user's jobs in the given cream endpoint. | ">Cancel&nbsp;All&nbsp;Jobs</a>
+&nbsp;&middot;&nbsp;
+<a href="#Cancel Job" title="|  Description:  |  Cancel the given job.                                       | ">Cancel&nbsp;Job</a>
+&nbsp;&middot;&nbsp;
+<a href="#Ce Service Info" title="|  Description: |    Get the service info of a CREAM ce.                                |">Ce&nbsp;Service&nbsp;Info</a>
+&nbsp;&middot;&nbsp;
+<a href="#Change Sandbox Transfer Method" title="|  Description:  |   Change the SANDBOX_TRANSFER_METHOD between GSIFTP and LRMS (@ /etc/lcas/ban_users.db)       | ">Change&nbsp;Sandbox&nbsp;Transfer&nbsp;Method</a>
+&nbsp;&middot;&nbsp;
+<a href="#Check Delegation Id In Filesystem" title="|  Description:  |   Check the presense (or not) of a delegation id in the respective cream sandbox dir     | ">Check&nbsp;Delegation&nbsp;Id&nbsp;In&nbsp;Filesystem</a>
+&nbsp;&middot;&nbsp;
+<a href="#Check Osb Basedesturi Files" title="|  Description:  |   Read from a jdl file the list of files contained in the OutputSandBox and OutputSandboxBaseDestURI attribute. |">Check&nbsp;Osb&nbsp;Basedesturi&nbsp;Files</a>
+&nbsp;&middot;&nbsp;
+<a href="#Check Osb Desturi Files" title="|  Description:  |  Read from a jdl file the list of files contained in the OutputSandboxDestURI attribute.     |">Check&nbsp;Osb&nbsp;Desturi&nbsp;Files</a>
+&nbsp;&middot;&nbsp;
+<a href="#Check Proxy" title="|  Description:  |  Check whether the proxy exists and if it has any time left.                                                  |">Check&nbsp;Proxy</a>
+&nbsp;&middot;&nbsp;
+<a href="#Check Resource Bdii Published Values" title="|  Description:  |  Validate the CREAM resource BDII published values according to                          |">Check&nbsp;Resource&nbsp;Bdii&nbsp;Published&nbsp;Values</a>
+&nbsp;&middot;&nbsp;
+<a href="#Check Wms Logging Info" title="|  Description:   |  Validates the output of a glite-wms-job-logging-info command             | ">Check&nbsp;Wms&nbsp;Logging&nbsp;Info</a>
+&nbsp;&middot;&nbsp;
+<a href="#Combo Jdl" title="|  Description:  |  Attribute checking jdl file.Sets the jdl attributes &quot;WholeNodes&quot;,&quot;HostNumber&quot; and &quot;SMPGranularity&quot;          |">Combo&nbsp;Jdl</a>
+&nbsp;&middot;&nbsp;
+<a href="#Cpu Allocation Jdl" title="|  Description:  |  Attribute checking jdl file.Sets the jdl attributes &quot;WholeNodes&quot;,&quot;HostNumber&quot; and &quot;SMPGranularity&quot;          |">Cpu&nbsp;Allocation&nbsp;Jdl</a>
+&nbsp;&middot;&nbsp;
+<a href="#Cpu Allocation Test" title="|  Description:  |  Validate the contents of the batch job submission script, according to:           |">Cpu&nbsp;Allocation&nbsp;Test</a>
+&nbsp;&middot;&nbsp;
+<a href="#Cpunumber Jdl" title="|  Description:  |   Attribute checking jdl file.Sets the jdl attribute &quot;CPUNumber&quot; to the given number.        | ">Cpunumber&nbsp;Jdl</a>
+&nbsp;&middot;&nbsp;
+<a href="#Create Delegation" title="|  Description: |   Delegate user's proxy credentials,to be used later for job submissions. | ">Create&nbsp;Delegation</a>
+&nbsp;&middot;&nbsp;
+<a href="#Create Dummy Script" title="|  Description:  |  Create a dummy bash script executing ls.             | ">Create&nbsp;Dummy&nbsp;Script</a>
+&nbsp;&middot;&nbsp;
+<a href="#Create Proxy" title="|  Description:  |  Create a user proxy.                                        |">Create&nbsp;Proxy</a>
+&nbsp;&middot;&nbsp;
+<a href="#Delegation Info" title="|  Description:  |  Fetch the information regarding a delegation.                               | ">Delegation&nbsp;Info</a>
+&nbsp;&middot;&nbsp;
+<a href="#Delete Osb Basedesturi Files" title="|  Description:  |   Read from a jdl file the list of files contained in the OutputSandBox and OutputSandboxBaseDestURI attribute. |">Delete&nbsp;Osb&nbsp;Basedesturi&nbsp;Files</a>
+&nbsp;&middot;&nbsp;
+<a href="#Delete Osb Desturi Files" title="|  Description:  |  Read from a jdl file the list of files contained in the OutputSandboxDestURI attribute.     |">Delete&nbsp;Osb&nbsp;Desturi&nbsp;Files</a>
+&nbsp;&middot;&nbsp;
+<a href="#Destroy Delegation" title="                |  Description:  |  Delete a delegation.                                                        | ">Destroy&nbsp;Delegation</a>
+&nbsp;&middot;&nbsp;
+<a href="#Destroy Proxy" title="|  Description:  |  Delete a user's proxy.  | ">Destroy&nbsp;Proxy</a>
+&nbsp;&middot;&nbsp;
+<a href="#Disable Cream Admin" title="|  Description:  |   Remove the specified DN as a CREAM administrator (add it to /etc/grid-security/admin-list)  | ">Disable&nbsp;Cream&nbsp;Admin</a>
+&nbsp;&middot;&nbsp;
+<a href="#Disable Submission" title="|  Description: |   Disable the submission to the designated CREAM endpoint. | ">Disable&nbsp;Submission</a>
+&nbsp;&middot;&nbsp;
+<a href="#Enable Cream Admin" title="|  Description: |   Add the specified DN as a CREAM administrator (add it to /etc/grid-security/admin-list) | ">Enable&nbsp;Cream&nbsp;Admin</a>
+&nbsp;&middot;&nbsp;
+<a href="#Enable Submission" title="|  Description:    Enable the submission to the designated CREAM endpoint. | ">Enable&nbsp;Submission</a>
+&nbsp;&middot;&nbsp;
+<a href="#Environment Jdl" title="|  Description:  |   Attribute checking jdl file. Set an environmental variable and check its value during runtime.     | ">Environment&nbsp;Jdl</a>
+&nbsp;&middot;&nbsp;
+<a href="#Epilogue Jdl" title="|  Description:  |  Attribute checking jdl file. Use the epilogue argument and execute an epilogue script.      | ">Epilogue&nbsp;Jdl</a>
+&nbsp;&middot;&nbsp;
+<a href="#Execute Noninteractive Ssh Com" title="|  Description: |   Execute a non interactive command through ssh on another host                                      |">Execute&nbsp;Noninteractive&nbsp;Ssh&nbsp;Com</a>
+&nbsp;&middot;&nbsp;
+<a href="#Execute Uberftp Command" title="|  Description: |    Execute an uberftp command on a gridftp url                                                 | ">Execute&nbsp;Uberftp&nbsp;Command</a>
+&nbsp;&middot;&nbsp;
+<a href="#Fetch Output Files" title="   |  Description: |  Gather the files from a certain job,store them in the specified directory and return the list of files transfered |">Fetch&nbsp;Output&nbsp;Files</a>
+&nbsp;&middot;&nbsp;
+<a href="#File Should Contain" title="|  Description:  |  Check whether the given file contains the given string.                             |">File&nbsp;Should&nbsp;Contain</a>
+&nbsp;&middot;&nbsp;
+<a href="#Files Should Not Be Empty" title="|  Description:  |  Copy a file from an SE to localhost,using lcg-cp.                                              | ">Files&nbsp;Should&nbsp;Not&nbsp;Be&nbsp;Empty</a>
+&nbsp;&middot;&nbsp;
+<a href="#Get Arch Smp Size" title="|  Description:  |  Get the published value of the GlueHostArchitectureSMPSize attribute          | ">Get&nbsp;Arch&nbsp;Smp&nbsp;Size</a>
+&nbsp;&middot;&nbsp;
+<a href="#Get Current Status" title="|  Description:  |  Return the current status of a job,with the use of the glite-ce-job-status command. |">Get&nbsp;Current&nbsp;Status</a>
+&nbsp;&middot;&nbsp;
+<a href="#Get Current Status Verbose" title="|  Description:  |  Return the current status of a job,with the use of the glite-ce-job-status command,with the given verbosity  |">Get&nbsp;Current&nbsp;Status&nbsp;Verbose</a>
+&nbsp;&middot;&nbsp;
+<a href="#Get Deleg Id From Status" title="|  Description:  |   Return the delegation id in use by a job                                  | ">Get&nbsp;Deleg&nbsp;Id&nbsp;From&nbsp;Status</a>
+&nbsp;&middot;&nbsp;
+<a href="#Get Delegation Id" title="|  Description: |   Get the delegation id in use by a job                                      |">Get&nbsp;Delegation&nbsp;Id</a>
+&nbsp;&middot;&nbsp;
+<a href="#Get Final Status" title="|  Description: |   Return the final status of a job,with the use of the glite-ce-job-status command.   |">Get&nbsp;Final&nbsp;Status</a>
+&nbsp;&middot;&nbsp;
+<a href="#Get Guid" title="|  Description:  |  Find all the guids of the format &quot;guid:36 char string&quot; in a file                                 |">Get&nbsp;Guid</a>
+&nbsp;&middot;&nbsp;
+<a href="#Get Job Sb" title="|  Description:  |  Find the gridftp url of the ISB of the given job                 | ">Get&nbsp;Job&nbsp;Sb</a>
+&nbsp;&middot;&nbsp;
+<a href="#Get Osb" title="|  Description:  |  Read from a jdl file the list of files contained in the OutputSandBox attribute. |">Get&nbsp;Osb</a>
+&nbsp;&middot;&nbsp;
+<a href="#Get Proxy Dn" title="|  Description:    Get user's proxy DN.  | ">Get&nbsp;Proxy&nbsp;Dn</a>
+&nbsp;&middot;&nbsp;
+<a href="#Get Status With Filter" title="|  Description:  |  Return the current statuses of jobs,with the use of the glite-ce-job-status command and a filter                |">Get&nbsp;Status&nbsp;With&nbsp;Filter</a>
+&nbsp;&middot;&nbsp;
+<a href="#Get Time In Status Format" title="|  Description:   |  Returns the time in the format accepted by glite-ce-job-status       | ">Get&nbsp;Time&nbsp;In&nbsp;Status&nbsp;Format</a>
+&nbsp;&middot;&nbsp;
+<a href="#Hostnumber Jdl" title="|  Description:  |  Attribute checking jdl file.Sets the jdl attribute &quot;HostNumber&quot; to the given number.        | ">Hostnumber&nbsp;Jdl</a>
+&nbsp;&middot;&nbsp;
+<a href="#Isb Baseuri Jdl" title="|  Description: |    File transfer checking jdl file. Store input files to a gridftp server,and use the jdl attribute   |">Isb&nbsp;Baseuri&nbsp;Jdl</a>
+&nbsp;&middot;&nbsp;
+<a href="#Isb Client To Ce Jdl" title="|  Description:  |  File transfer checking jdl file. Stage input files from client to CE node.  | ">Isb&nbsp;Client&nbsp;To&nbsp;Ce&nbsp;Jdl</a>
+&nbsp;&middot;&nbsp;
+<a href="#Isb Gsiftp To Ce Jdl" title="|  Description:  |  File transfer checking jdl file. Store input files to a gridftp server,and use the jdl attribute    |">Isb&nbsp;Gsiftp&nbsp;To&nbsp;Ce&nbsp;Jdl</a>
+&nbsp;&middot;&nbsp;
+<a href="#Job Status Should Be" title="|  Description: |   Check that the given job's status is the one given.     | ">Job&nbsp;Status&nbsp;Should&nbsp;Be</a>
+&nbsp;&middot;&nbsp;
+<a href="#Jobdbadminpurger" title="|  Description: |   Purge a job using the JobDBAdminPurger.sh script, run on cream host                                  | ">Jobdbadminpurger</a>
+&nbsp;&middot;&nbsp;
+<a href="#Lcg Cp" title="|  Description:  |  Copy a file from an SE to localhost,using lcg-cp.           |">Lcg&nbsp;Cp</a>
+&nbsp;&middot;&nbsp;
+<a href="#Lcg Cr" title="|  Description:  |  Upload a file to an SE,using lcg-cr.                        | ">Lcg&nbsp;Cr</a>
+&nbsp;&middot;&nbsp;
+<a href="#Lcg Del" title="|  Description:  |  Delete all replicas of a file and its LFC entry,using lcg-del.      | ">Lcg&nbsp;Del</a>
+&nbsp;&middot;&nbsp;
+<a href="#Ldap Search" title="|  Description:  |  Perform a simple ldapsearch. The option -LLL is always set.                 | ">Ldap&nbsp;Search</a>
+&nbsp;&middot;&nbsp;
+<a href="#Lfc Ls" title="|  Description:  |  List an lfn,using lfc-ls.           | ">Lfc&nbsp;Ls</a>
+&nbsp;&middot;&nbsp;
+<a href="#Lfc Mkdir" title="|  Description:  |  Create a folder in the LFC,using lfc-mkdir. | ">Lfc&nbsp;Mkdir</a>
+&nbsp;&middot;&nbsp;
+<a href="#Lfc Rmdir" title="|  Description:  |  Delete a folder in the LFC,using lfc-rm -r. | ">Lfc&nbsp;Rmdir</a>
+&nbsp;&middot;&nbsp;
+<a href="#List Jobs" title="|  Description:  |  List the jobs not purged by the specified cream endpoint for the user executing the command. | ">List&nbsp;Jobs</a>
+&nbsp;&middot;&nbsp;
+<a href="#List Proxy Sandbox" title="|  Description:  |   Check the presense (or not) of a delegation id in db queries contents     | ">List&nbsp;Proxy&nbsp;Sandbox</a>
+&nbsp;&middot;&nbsp;
+<a href="#Localhost Output Jdl" title="|  Description:  |  File transfer checking jdl file. Stage files to the CE node (gsiftp://localhost).   | ">Localhost&nbsp;Output&nbsp;Jdl</a>
+&nbsp;&middot;&nbsp;
+<a href="#Modify Cream Config Xml" title="|  Description:  |   Modify the given attribute of the cream config xml file                   | ">Modify&nbsp;Cream&nbsp;Config&nbsp;Xml</a>
+&nbsp;&middot;&nbsp;
+<a href="#Multiple Lcg Cp" title="|  Description:  |  Copy a file from an SE to localhost,using lcg-cp.               | ">Multiple&nbsp;Lcg&nbsp;Cp</a>
+&nbsp;&middot;&nbsp;
+<a href="#Osb Basedesturi Jdl" title="|  Description: |    File transfer checking jdl file. Stage output files to a gridftp server,with the use of the        |">Osb&nbsp;Basedesturi&nbsp;Jdl</a>
+&nbsp;&middot;&nbsp;
+<a href="#Osb Desturi Jdl" title="|  Description: |    File transfer checking jdl file. Stage output files to a gridftp server,with the use of the        |">Osb&nbsp;Desturi&nbsp;Jdl</a>
+&nbsp;&middot;&nbsp;
+<a href="#Output Data Jdl" title="|  Description:  |   Attribute checking jdl file. Uses a combination of the output data attributes.                     | ">Output&nbsp;Data&nbsp;Jdl</a>
+&nbsp;&middot;&nbsp;
+<a href="#Prologue Jdl" title="|  Description: |   Attribute checking jdl file. Use the prologue argument and execute a prologue script.       | ">Prologue&nbsp;Jdl</a>
+&nbsp;&middot;&nbsp;
+<a href="#Proxy Info" title="|  Description:    Read user's proxy info.  | ">Proxy&nbsp;Info</a>
+&nbsp;&middot;&nbsp;
+<a href="#Purge All Jobs" title="|  Description:  |  Purge all the user's jobs in the given cream endpoint.  | ">Purge&nbsp;All&nbsp;Jobs</a>
+&nbsp;&middot;&nbsp;
+<a href="#Purge Job" title="|  Description: |   Purge the job with the corresponding jid at the given CREAM endpoint  | ">Purge&nbsp;Job</a>
+&nbsp;&middot;&nbsp;
+<a href="#Qdel Job" title="|  Description: |   Manually qdel a job.                                                                        | ">Qdel&nbsp;Job</a>
+&nbsp;&middot;&nbsp;
+<a href="#Renew Proxy" title="|  Description: |   Renew a delegated proxy in a CREAM endpoint                                      |">Renew&nbsp;Proxy</a>
+&nbsp;&middot;&nbsp;
+<a href="#Reset Cream Config Xml" title="|  Description:  |   Reset the cream config xml file to the original                           | ">Reset&nbsp;Cream&nbsp;Config&nbsp;Xml</a>
+&nbsp;&middot;&nbsp;
+<a href="#Reset Limiter Threshold" title="|  Description:  |  Reset the cream limiter perl script to the original unmodified one        |">Reset&nbsp;Limiter&nbsp;Threshold</a>
+&nbsp;&middot;&nbsp;
+<a href="#Restart Cream" title="|  Description:  |   Restart the tomcat service, thus restarting cream                         | ">Restart&nbsp;Cream</a>
+&nbsp;&middot;&nbsp;
+<a href="#Resume All Jobs" title="|  Description:  |  Suspend all the user's jobs in the given cream endpoint.    | ">Resume&nbsp;All&nbsp;Jobs</a>
+&nbsp;&middot;&nbsp;
+<a href="#Resume Job" title="|  Description:  |  Resumes the given (previously suspended) job.            | ">Resume&nbsp;Job</a>
+&nbsp;&middot;&nbsp;
+<a href="#Save Batch Job Submission Script Off" title="|  Description:  |   Modify blah_common_submit_functions.sh in order to NOT save the job submission script         | ">Save&nbsp;Batch&nbsp;Job&nbsp;Submission&nbsp;Script&nbsp;Off</a>
+&nbsp;&middot;&nbsp;
+<a href="#Save Batch Job Submission Script On" title="|  Description:  |   Modify blah_common_submit_functions.sh in order to save the job submission script         | ">Save&nbsp;Batch&nbsp;Job&nbsp;Submission&nbsp;Script&nbsp;On</a>
+&nbsp;&middot;&nbsp;
+<a href="#Send Signal To Process" title="|  Description: |   Send a process a certain signal.                             |">Send&nbsp;Signal&nbsp;To&nbsp;Process</a>
+&nbsp;&middot;&nbsp;
+<a href="#Set Limiter Threshold" title="|  Description:  |  Set one threshold of the cream limiter perl script                            |">Set&nbsp;Limiter&nbsp;Threshold</a>
+&nbsp;&middot;&nbsp;
+<a href="#Simple Jdl" title="|  Description:  |  Simple jdl file.Executes /bin/uname -a.             | ">Simple&nbsp;Jdl</a>
+&nbsp;&middot;&nbsp;
+<a href="#Sleep Jdl" title="|  Description: |   Simple jdl file.Executes /bin/sleep for the defined number of seconds.      | ">Sleep&nbsp;Jdl</a>
+&nbsp;&middot;&nbsp;
+<a href="#Smpgranularity Jdl" title="|  Description:  |   Attribute checking jdl file.Sets the jdl attribute &quot;SMPGranularity&quot; to the given number.   | ">Smpgranularity&nbsp;Jdl</a>
+&nbsp;&middot;&nbsp;
+<a href="#Start Old Blparser" title="|  Description:  |   Start the old blparser service                                             | ">Start&nbsp;Old&nbsp;Blparser</a>
+&nbsp;&middot;&nbsp;
+<a href="#Stop Old Blparser" title="|  Description:  |   Stop the old blparser service                                             | ">Stop&nbsp;Old&nbsp;Blparser</a>
+&nbsp;&middot;&nbsp;
+<a href="#String Should Contain" title="|  Description:  |  Check whether the given string contains the given substring.                        | ">String&nbsp;Should&nbsp;Contain</a>
+&nbsp;&middot;&nbsp;
+<a href="#Submit And Wait" title="|  Description:   |  Submit a job and wait until it finishes.  | ">Submit&nbsp;And&nbsp;Wait</a>
+&nbsp;&middot;&nbsp;
+<a href="#Submit Job" title="|  Description: |   Submit a job with automatic or explicit delegation and return it's job id.                      | ">Submit&nbsp;Job</a>
+&nbsp;&middot;&nbsp;
+<a href="#Suspend All Jobs" title="|  Description:  |  Suspend all the user's jobs in the given cream endpoint.    | ">Suspend&nbsp;All&nbsp;Jobs</a>
+&nbsp;&middot;&nbsp;
+<a href="#Suspend Job" title="|  Description:  |  Suspends the given job.                                     | ">Suspend&nbsp;Job</a>
+&nbsp;&middot;&nbsp;
+<a href="#Uberftp Upload" title="|  Description: |   Upload a file to a gridftp server with uberftp      | ">Uberftp&nbsp;Upload</a>
+&nbsp;&middot;&nbsp;
+<a href="#Unban User Argus" title="|  Description: |   Un-Ban the specified DN using pap-admin cli on the argus host                           | ">Unban&nbsp;User&nbsp;Argus</a>
+&nbsp;&middot;&nbsp;
+<a href="#Unban User Gjaf" title="|  Description:  |   Remove the specified DN as a CREAM banned user (remove it from /etc/lcas/ban_users.db)      | ">Unban&nbsp;User&nbsp;Gjaf</a>
+&nbsp;&middot;&nbsp;
+<a href="#Validate Ce Service Info" title="|  Description:   |  Validates the output of a glite-ce-service-info command  | ">Validate&nbsp;Ce&nbsp;Service&nbsp;Info</a>
+&nbsp;&middot;&nbsp;
+<a href="#Validate Glue" title="|  Description:  |   Run the glue validator for the designated CREAM endpoint                  | ">Validate&nbsp;Glue</a>
+&nbsp;&middot;&nbsp;
+<a href="#Validate Job Status" title="|  Description:   |  Validates the output of a glite-ce-job-status command       | ">Validate&nbsp;Job&nbsp;Status</a>
+&nbsp;&middot;&nbsp;
+<a href="#Wait For Status" title="|  Description: |   Wait for the given job to reach the given status.                      |">Wait&nbsp;For&nbsp;Status</a>
+&nbsp;&middot;&nbsp;
+<a href="#Wholenodes Jdl" title="|  Description:  |  Attribute checking jdl file.Sets the jdl attribute &quot;WholeNodes&quot; to the given value. | ">Wholenodes&nbsp;Jdl</a>
+&nbsp;&middot;&nbsp;
+<a href="#Wms Get Final Job Status" title="|  Description:  |  Return the final status of a wms job,with the use of the glite-wms-job-status command.      |">Wms&nbsp;Get&nbsp;Final&nbsp;Job&nbsp;Status</a>
+&nbsp;&middot;&nbsp;
+<a href="#Wms Get Job Status" title="|  Description:  |  Return the current status of a wms job,with the use of the glite-wms-job-status command.    |">Wms&nbsp;Get&nbsp;Job&nbsp;Status</a>
+&nbsp;&middot;&nbsp;
+<a href="#Wms Job Logging Info" title="|  Description:  |  Return the current status of a wms job,with the use of the glite-wms-job-status command.    |">Wms&nbsp;Job&nbsp;Logging&nbsp;Info</a>
+&nbsp;&middot;&nbsp;
+<a href="#Wms Job Submit" title="|  Description: |   Submit a job to the WMS, with automatic or explicit delegation and return it's job id.              |">Wms&nbsp;Job&nbsp;Submit</a>
+</div>
+
+<h2>Keywords</h2>
+<table border="1" class="keywords">
+<tr>
+  <th class="kw">Keyword</th>
+  <th class="arg">Arguments</th>
+  <th class="doc">Documentation</th>
+</tr>
+<tr>
+  <td class="kw"><a name="Allowed Submission"></a>Allowed Submission</td>
+  <td class="arg">ce_endpoint</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Return the output of the glite-ce-allowed-submission command</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>ce_endpoint</td>
+<td>the cream endpoint</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>the command's output.</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Ban User Argus"></a>Ban User Argus</td>
+  <td class="arg">dn, argus_host</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Ban the specified DN using pap-admin cli on the argus host</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>dn</td>
+<td>Distinguished Name to be added</td>
+</tr>
+<tr>
+<td></td>
+<td>argus_host</td>
+<td>the argus host</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>Nothing (raises exception upon error)</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Ban User Gjaf"></a>Ban User Gjaf</td>
+  <td class="arg">dn, ce_endpoint</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Add the specified DN as a CREAM banned user (add it to /etc/lcas/ban_users.db)</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>dn</td>
+<td>Distinguished Name to be added</td>
+</tr>
+<tr>
+<td></td>
+<td>ce_endpoint</td>
+<td>the cream endpoint</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>Nothing (raises exception upon error)</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Bkill Job"></a>Bkill Job</td>
+  <td class="arg">jid, lsf_host</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Manually bkill a job.</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>jid</td>
+<td>job identifier</td>
+</tr>
+<tr>
+<td></td>
+<td>lsf_host</td>
+<td>the server hosting lsf, either ip or name</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>Nothing</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Cancel All Jobs"></a>Cancel All Jobs</td>
+  <td class="arg">ce_endpoint</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Cancel all the user's jobs in the given cream endpoint.</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>ce_endpoint</td>
+<td>cream endpoint.</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>nothing.</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Cancel Job"></a>Cancel Job</td>
+  <td class="arg">job_id</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Cancel the given job.</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>job_id</td>
+<td>as returned by the submit operation.</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>nothing.</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Ce Service Info"></a>Ce Service Info</td>
+  <td class="arg">ce_endpoint, verbosity</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Get the service info of a CREAM ce.</td>
+<td></td>
+</tr>
+<tr>
+<td>Arguments:</td>
+<td>ce_endpoint</td>
+<td>the CREAM endpoint</td>
+</tr>
+<tr>
+<td></td>
+<td>verbosity</td>
+<td>how much information will be shown, either 1 or 2</td>
+</tr>
+<tr>
+<td>Returns:</td>
+<td>The output of the command</td>
+<td></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Change Sandbox Transfer Method"></a>Change Sandbox Transfer Method</td>
+  <td class="arg">ce_endpoint</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Change the SANDBOX_TRANSFER_METHOD between GSIFTP and LRMS (@ /etc/lcas/ban_users.db)</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>ce_endpoint</td>
+<td>the cream endpoint</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>Nothing (raises exception upon error)</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Check Delegation Id In Filesystem"></a>Check Delegation Id In Filesystem</td>
+  <td class="arg">contents_before, contents_after, deleg_id</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Check the presense (or not) of a delegation id in the respective cream sandbox dir</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>contents_before</td>
+<td>fs contents before running the purger</td>
+</tr>
+<tr>
+<td></td>
+<td>contents_after</td>
+<td>fs contents after running the purger</td>
+</tr>
+<tr>
+<td></td>
+<td>deleg_id</td>
+<td>the delegation id searched for</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>nothing (raises exception if the desired outcome isn't met)</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Check Osb Basedesturi Files"></a>Check Osb Basedesturi Files</td>
+  <td class="arg">jdl_path, gridftp_server, gridftp_path</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Read from a jdl file the list of files contained in the OutputSandBox and OutputSandboxBaseDestURI attribute.</td>
+</tr>
+<tr>
+<td></td>
+<td>Then check if these files exist or not.</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>jdl_path</td>
+<td>path to the jdl file</td>
+</tr>
+<tr>
+<td></td>
+<td>gridftp_server</td>
+<td>the gridftp server in use</td>
+</tr>
+<tr>
+<td></td>
+<td>gridftp_path</td>
+<td>the path within the gridftp server</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>True or False.</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Check Osb Desturi Files"></a>Check Osb Desturi Files</td>
+  <td class="arg">jdl_path, gridftp_server, gridftp_path</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Read from a jdl file the list of files contained in the OutputSandboxDestURI attribute.</td>
+</tr>
+<tr>
+<td></td>
+<td>Then check if these files exist or not.</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>jdl_path</td>
+<td>path to the jdl file</td>
+</tr>
+<tr>
+<td></td>
+<td>gridftp_server</td>
+<td>the gridftp server in use</td>
+</tr>
+<tr>
+<td></td>
+<td>gridftp_path</td>
+<td>the path within the gridftp server</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>True or False.</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Check Proxy"></a>Check Proxy</td>
+  <td class="arg">time_left=None</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Check whether the proxy exists and if it has any time left.</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>Without any arguments,it checks if the proxy exists and has any time left</td>
+</tr>
+<tr>
+<td></td>
+<td>With one argument,it checks if the proxy exists and has greater than or equal to the requested time left.</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>nothing</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Check Resource Bdii Published Values"></a>Check Resource Bdii Published Values</td>
+  <td class="arg">results</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Validate the CREAM resource BDII published values according to</td>
+</tr>
+<tr>
+<td></td>
+<td><a href="https://wiki.italiangrid.it/twiki/bin/view/CREAM/CreamTestWorkPlan#Resource_BDII_test">https://wiki.italiangrid.it/twiki/bin/view/CREAM/CreamTestWorkPlan#Resource_BDII_test</a></td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>results</td>
+<td>list with ldapsearch results</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>Nothing. Raises exception upon non-confirmation.</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Check Wms Logging Info"></a>Check Wms Logging Info</td>
+  <td class="arg">output</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Validates the output of a glite-wms-job-logging-info command</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>output</td>
+<td>the output of a wms job status logging ingo command</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>Nothing (raises exception uppon non-validation)</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Combo Jdl"></a>Combo Jdl</td>
+  <td class="arg">vo, wholenodes, hostnumber, smpgranularity, output_dir</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Attribute checking jdl file.Sets the jdl attributes "WholeNodes","HostNumber" and "SMPGranularity"</td>
+</tr>
+<tr>
+<td></td>
+<td>to the given numbers/values. It is used to test whether these attributes can be combined. In theory,</td>
+</tr>
+<tr>
+<td></td>
+<td>when WholeNodes is "False",the other two shouldn't be able to be set and an error should be produced</td>
+</tr>
+<tr>
+<td></td>
+<td>during jdl submission. This should be tested for arbitrary values of hostnumber and smpgranularity,</td>
+</tr>
+<tr>
+<td></td>
+<td>and for both cases of wholenodes (set to "True" and set to "False").</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>vo</td>
+<td>virtual organisation</td>
+</tr>
+<tr>
+<td></td>
+<td>smpgranularity</td>
+<td>jdl attribute</td>
+</tr>
+<tr>
+<td></td>
+<td>hostnumber</td>
+<td>jdl attribute</td>
+</tr>
+<tr>
+<td></td>
+<td>wholenodes</td>
+<td>jdl attribute</td>
+</tr>
+<tr>
+<td></td>
+<td>output_dir</td>
+<td>the directory to put the file in</td>
+</tr>
+<tr>
+<td>Returns:</td>
+<td>Temporary file name.</td>
+<td></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Cpu Allocation Jdl"></a>Cpu Allocation Jdl</td>
+  <td class="arg">output_dir, vo, wholenodes=None, hostnumber=None, smpgranularity=None, cpunumber=None</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Attribute checking jdl file.Sets the jdl attributes "WholeNodes","HostNumber" and "SMPGranularity"</td>
+</tr>
+<tr>
+<td></td>
+<td>to the given numbers/values. If a value isn't given, then it is ignored in the final jdl file.</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>output_dir</td>
+<td>the directory to put the file in</td>
+</tr>
+<tr>
+<td></td>
+<td>vo</td>
+<td>virtual organisation</td>
+</tr>
+<tr>
+<td></td>
+<td>smpgranularity</td>
+<td>jdl attribute</td>
+</tr>
+<tr>
+<td></td>
+<td>hostnumber</td>
+<td>jdl attribute</td>
+</tr>
+<tr>
+<td></td>
+<td>wholenodes</td>
+<td>jdl attribute</td>
+</tr>
+<tr>
+<td></td>
+<td>cpunumber</td>
+<td>jdl attribute</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>Temporary file name.</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Cpu Allocation Test"></a>Cpu Allocation Test</td>
+  <td class="arg">jid, ce_endpoint, test_type=0, wholenodes=0, cpunumber=0, smpgranularity=0, hostnumber=0, smpsize=0, batch_system=0</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Validate the contents of the batch job submission script, according to:</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td><a href="https://wiki.italiangrid.it/twiki/bin/view/CREAM/CreamTestWorkPlan">https://wiki.italiangrid.it/twiki/bin/view/CREAM/CreamTestWorkPlan</a></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>cpu allocation test specifications. Per test information follows:</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>Wherever it appears,S is the value published as GlueHostArchitectureSMPSize</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>Test type 1</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>Jdl Attributes: WholeNodes=true SMPGranularity=G HostNumber=H, H&gt;1</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>Verification for LSF: &nbsp;BSUB -n S*H, BSUB -R "span[ptile=S]", BSUB -x</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>Verification for PBS: &nbsp;PBS -l nodes=H:ppn=S, PBS -W x=NACCESSPOLICY:SINGLEJOB</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>Test type 2</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>JDL Attributes: WholeNodes=true SMPGranularity=G</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>Verification for LSF: BSUB -n S, BSUB -R "span[jpsts=1]", BSUB -x</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>Verification for PBS: PBS -l nodes=1:ppn=S, PBS -W x=NACCESSPOLICY:SINGLEJOB</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>Test type 3</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>JDL Attributes: WholeNodes=true, HostNumber=H</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>Verification for LSF: BSUB -n S*H, BSUB -R "span[ptiles=S]", BSUB -x</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>Verification for PBS: PBS -l nodes=H:ppn=S, PBS -W x=NACCESSPOLICY:SINGLEJOB</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>Test type 4</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>JDL Attributes: WholeNodes=false, SMPGranularity=G, CPUNumber=C</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>Verification for LSF: BSUB -n C, BSUB -R "span[ptile=G]"</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>Verification for PBS: PBS -l nodes=N:ppn=G { [+1:ppn=R] if r&gt;0 }</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>Test type 5</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>JDL Attributes: WholeNodes=false, HostNumber=H, CPUNumber=C, H&gt;1</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>Verification for LSF: BSUB -n C, BSUB -R "span[ptile={ N if R=0 ; N+1 if R&gt;0 }]"</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>Verification for PBS: PBS -l nodes=H-R:ppn=N { [+R:ppn=N+1] if R&gt;0 }</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>Test type 6</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>JDL Attributes: WholeNodes=false, CPUNumber=C</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>Verification for LSF: BSUB -n C</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>Verification for PBS: PBS -L nodes=C</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>NOTE: Default values are used due to robot framework limitations for named</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>arguments. These default values serve no other purpose.</td>
+<td></td>
+</tr>
+<tr>
+<td>Arguments:</td>
+<td>jid</td>
+<td>CREAM job identifier</td>
+</tr>
+<tr>
+<td></td>
+<td>ce_endpoint</td>
+<td>the CREAM endpoint</td>
+</tr>
+<tr>
+<td></td>
+<td>test_type</td>
+<td>one of the aforementioned test types, as an integer</td>
+</tr>
+<tr>
+<td></td>
+<td>wholenodes</td>
+<td>jdl attribute in use (either true or false!)</td>
+</tr>
+<tr>
+<td></td>
+<td>cpunumber</td>
+<td>jdl attribute in use</td>
+</tr>
+<tr>
+<td></td>
+<td>smpgranularity</td>
+<td>jdl attribute in use</td>
+</tr>
+<tr>
+<td></td>
+<td>hostnumber</td>
+<td>jdl attribute in use</td>
+</tr>
+<tr>
+<td></td>
+<td>smpsize</td>
+<td>the value published as GlueHostArchitectureSMPSize</td>
+</tr>
+<tr>
+<td></td>
+<td>batch_system</td>
+<td>the underlying lrms system</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>Nothing (raises exception if anything is out of order)</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Cpunumber Jdl"></a>Cpunumber Jdl</td>
+  <td class="arg">vo, cpunumber, output_dir</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Attribute checking jdl file.Sets the jdl attribute "CPUNumber" to the given number.</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>vo</td>
+<td>virtual organisation</td>
+</tr>
+<tr>
+<td></td>
+<td>cpunumber</td>
+<td>jdl attribute</td>
+</tr>
+<tr>
+<td></td>
+<td>output_dir</td>
+<td>the directory to put the file in</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>Temporary file name.</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Create Delegation"></a>Create Delegation</td>
+  <td class="arg">cream_endpoint, delegId</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Delegate user's proxy credentials,to be used later for job submissions.</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>cream_endpoint</td>
+<td>the cream endpoint</td>
+</tr>
+<tr>
+<td></td>
+<td>delegId</td>
+<td>the delegation id string</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>nothing</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Create Dummy Script"></a>Create Dummy Script</td>
+  <td class="arg">output_dir</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Create a dummy bash script executing ls.</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>output_dir</td>
+<td>the directory to put the file in</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>Temporary file name</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Create Proxy"></a>Create Proxy</td>
+  <td class="arg">password, vo, cert=None, key=None, time=None</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Create a user proxy.</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>password</td>
+<td>the user's proxy password</td>
+</tr>
+<tr>
+<td></td>
+<td>vo</td>
+<td>for the voms extention.</td>
+</tr>
+<tr>
+<td></td>
+<td>cert</td>
+<td>non standard certificate path</td>
+</tr>
+<tr>
+<td></td>
+<td>key</td>
+<td>non standard key path</td>
+</tr>
+<tr>
+<td></td>
+<td>time</td>
+<td>the validity period of the proxy. Form: HH:MM</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>nothing.</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Delegation Info"></a>Delegation Info</td>
+  <td class="arg">deleg_endpoint, deleg_id</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Fetch the information regarding a delegation.</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>deleg_endpoint</td>
+<td>the delegation endpoint of a cream service</td>
+</tr>
+<tr>
+<td></td>
+<td>deleg_id</td>
+<td>the delegation id</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>The commands output or the string "NOT IN STORAGE" if the specified</td>
+</tr>
+<tr>
+<td></td>
+<td>delegation id doesn't exist in the specified endpoint</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Delete Osb Basedesturi Files"></a>Delete Osb Basedesturi Files</td>
+  <td class="arg">jdl_path, gridftp_server, gridftp_path</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Read from a jdl file the list of files contained in the OutputSandBox and OutputSandboxBaseDestURI attribute.</td>
+</tr>
+<tr>
+<td></td>
+<td>Then delete these files with lcg-del.</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>jdl_path</td>
+<td>path to the jdl file</td>
+</tr>
+<tr>
+<td></td>
+<td>gridftp_server</td>
+<td>the gridftp server in use</td>
+</tr>
+<tr>
+<td></td>
+<td>gridftp_path</td>
+<td>the path within the gridftp server</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>nothing.</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Delete Osb Desturi Files"></a>Delete Osb Desturi Files</td>
+  <td class="arg">jdl_path, gridftp_server</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Read from a jdl file the list of files contained in the OutputSandboxDestURI attribute.</td>
+</tr>
+<tr>
+<td></td>
+<td>Then delete these files with lcg-del.</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>jdl_path</td>
+<td>path to the jdl file</td>
+</tr>
+<tr>
+<td></td>
+<td>gridftp_server</td>
+<td>the gridftp server in use</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>nothing.</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Destroy Delegation"></a>Destroy Delegation</td>
+  <td class="arg">deleg_endpoint, deleg_id</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Delete a delegation.</td>
+</tr>
+</table>
+s<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>deleg_endpoint</td>
+<td>the delegation endpoint of a cream service</td>
+</tr>
+<tr>
+<td></td>
+<td>deleg_id</td>
+<td>the delegation id</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>nothing.</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Destroy Proxy"></a>Destroy Proxy</td>
+  <td class="arg"></td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Delete a user's proxy.</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>none.</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>nothing.</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Disable Cream Admin"></a>Disable Cream Admin</td>
+  <td class="arg">dn, ce_endpoint</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Remove the specified DN as a CREAM administrator (add it to /etc/grid-security/admin-list)</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>dn</td>
+<td>Distinguished Name to be added</td>
+</tr>
+<tr>
+<td></td>
+<td>ce_endpoint</td>
+<td>the cream endpoint</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>Nothing (raises exception upon error)</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Disable Submission"></a>Disable Submission</td>
+  <td class="arg">ce_endpoint</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Disable the submission to the designated CREAM endpoint.</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>ce_endpoint</td>
+<td>the cream endpoint</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>nothing (raises exception in case of error)</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Enable Cream Admin"></a>Enable Cream Admin</td>
+  <td class="arg">dn, ce_endpoint</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Add the specified DN as a CREAM administrator (add it to /etc/grid-security/admin-list)</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>dn</td>
+<td>Distinguished Name to be added</td>
+</tr>
+<tr>
+<td></td>
+<td>ce_endpoint</td>
+<td>the cream endpoint</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>Nothing (raises exception upon error)</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Enable Submission"></a>Enable Submission</td>
+  <td class="arg">ce_endpoint</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description: &nbsp; &nbsp;Enable the submission to the designated CREAM endpoint.</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments: &nbsp; &nbsp; &nbsp;ce_endpoint</td>
+<td>the cream endpoint</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns: &nbsp; &nbsp; &nbsp; &nbsp;nothing (raises exception in case of error)</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Environment Jdl"></a>Environment Jdl</td>
+  <td class="arg">vo, output_dir</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Attribute checking jdl file. Set an environmental variable and check its value during runtime.</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>vo</td>
+<td>virtual organisation</td>
+</tr>
+<tr>
+<td></td>
+<td>output_dir</td>
+<td>the directory to put the file in</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>Temporary jdl file name,temporary shell script file name.</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Epilogue Jdl"></a>Epilogue Jdl</td>
+  <td class="arg">vo, output_dir</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Attribute checking jdl file. Use the epilogue argument and execute an epilogue script.</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>vo</td>
+<td>virtual organisation</td>
+</tr>
+<tr>
+<td></td>
+<td>output_dir</td>
+<td>the directory to put the file in</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>Temporary jdl file name,temporary shell script file name.,temporary epilogue script.</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Execute Noninteractive Ssh Com"></a>Execute Noninteractive Ssh Com</td>
+  <td class="arg">command, host, user, port=22</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Execute a non interactive command through ssh on another host</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>NOTE: Shell metacharacters are NOT recognized. Call them through 'bash -c'.</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>Example: '/bin/bash -c "ls -l</td>
+<td>grep LOG &gt; log_list.txt"'</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>host</td>
+<td>ssh host</td>
+</tr>
+<tr>
+<td></td>
+<td>port</td>
+<td>ssh port, 22 by default</td>
+</tr>
+<tr>
+<td></td>
+<td>user</td>
+<td>the user name to use for the ssh connection</td>
+</tr>
+<tr>
+<td></td>
+<td>command</td>
+<td>the command to execute</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>the command's output</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Execute Uberftp Command"></a>Execute Uberftp Command</td>
+  <td class="arg">uberftp_command, gridftp_server, gridftp_path</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Execute an uberftp command on a gridftp url</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>uberftp_command</td>
+<td>one of cat,chgrp,chmod,dir,ls,mkdir,rename,rm,rmdir,size,stage</td>
+</tr>
+<tr>
+<td></td>
+<td>gridftp_server</td>
+<td>the gridftp server hostname</td>
+</tr>
+<tr>
+<td></td>
+<td>gridftp_path</td>
+<td>the path in the gridftp server</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>The output of the command</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Fetch Output Files"></a>Fetch Output Files</td>
+  <td class="arg">dest_dir, job_id, timeout=0</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Gather the files from a certain job,store them in the specified directory and return the list of files transfered</td>
+</tr>
+<tr>
+<td></td>
+<td>as they exist on the disk after the transfer operation.</td>
+</tr>
+<tr>
+<td></td>
+<td>Note: Target directory must be empty!Any existing output files with the same name are overwritten!</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>dest_dir</td>
+<td>directory to store the files locally</td>
+</tr>
+<tr>
+<td></td>
+<td>job_id</td>
+<td>the job's cream job id</td>
+</tr>
+<tr>
+<td></td>
+<td>timeout</td>
+<td>time to wait before fetching output (used to wait until files are uploaded to CE's gridftp server)</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>a list with the files transfered</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="File Should Contain"></a>File Should Contain</td>
+  <td class="arg">file_path, search_string</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Check whether the given file contains the given string.</td>
+</tr>
+<tr>
+<td></td>
+<td>Note that this must be used for small files,since it reads it all in memory.</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>file_path</td>
+<td>the path pointing to the file</td>
+</tr>
+<tr>
+<td></td>
+<td>search_string</td>
+<td>the string searching for</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>True or False.</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Files Should Not Be Empty"></a>Files Should Not Be Empty</td>
+  <td class="arg">input_files</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Copy a file from an SE to localhost,using lcg-cp.</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>files</td>
+<td>file(s) to be checked for being non-empty</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>this argument can either be a list of strings or a single string</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>Nothing - raises error if any of the files given are empty</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Get Arch Smp Size"></a>Get Arch Smp Size</td>
+  <td class="arg">ce_endpoint, ldap_port</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Get the published value of the GlueHostArchitectureSMPSize attribute</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>ce_endpoint</td>
+<td>the CREAM endpoint</td>
+</tr>
+<tr>
+<td></td>
+<td>ldap_port</td>
+<td>the ldap port to use</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>the value of the attribute</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Get Current Status"></a>Get Current Status</td>
+  <td class="arg">job_id</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Return the current status of a job,with the use of the glite-ce-job-status command.</td>
+</tr>
+<tr>
+<td></td>
+<td>This function will NOT wait until the job is in a final state.</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>job_id</td>
+<td>the job id,as returned by the submit operation.</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>job's status as a string.</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Get Current Status Verbose"></a>Get Current Status Verbose</td>
+  <td class="arg">job_id, verbosity=2</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Return the current status of a job,with the use of the glite-ce-job-status command,with the given verbosity</td>
+</tr>
+<tr>
+<td></td>
+<td>This function will NOT wait until the job is in a final state.</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>job_id</td>
+<td>as returned by the submit operation.</td>
+</tr>
+<tr>
+<td></td>
+<td>verbosity</td>
+<td>0,1 or 2</td>
+</tr>
+<tr>
+<td>Returns:</td>
+<td>a string.</td>
+<td></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Get Deleg Id From Status"></a>Get Deleg Id From Status</td>
+  <td class="arg">status</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Return the delegation id in use by a job</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>status</td>
+<td>the job's verbose status</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>the delegation id (string)</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Get Delegation Id"></a>Get Delegation Id</td>
+  <td class="arg">jid</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Get the delegation id in use by a job</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>jid</td>
+<td>CREAM job identifier</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>the delegation id string</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Get Final Status"></a>Get Final Status</td>
+  <td class="arg">job_id</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Return the final status of a job,with the use of the glite-ce-job-status command.</td>
+</tr>
+<tr>
+<td></td>
+<td>This command will wait until the job is in a final state.</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>job_id</td>
+<td>the job id,as returned by the submit operation.</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>job's final status as a string.</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Get Guid"></a>Get Guid</td>
+  <td class="arg">file_path, prefix=None</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Find all the guids of the format "guid:36 char string" in a file</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>file_path</td>
+<td>the path to the file containing the guids (most probanly a DSUpload file)</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>this argument can either be a list of strings or a single string</td>
+</tr>
+<tr>
+<td></td>
+<td>prefix</td>
+<td>common prefix for all the files of the first argument, e.g.: /tmp/</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>This argument isn't mandatory</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>list with corresponding guids</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Get Job Sb"></a>Get Job Sb</td>
+  <td class="arg">jid</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Find the gridftp url of the ISB of the given job</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>jid</td>
+<td>job id returned by job submit operation</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>(gridftp server, gridftp path)</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Get Osb"></a>Get Osb</td>
+  <td class="arg">jdl_path</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Read from a jdl file the list of files contained in the OutputSandBox attribute.</td>
+</tr>
+<tr>
+<td>Arguments:</td>
+<td>jdl_path &nbsp; &nbsp; &nbsp; &nbsp;path to the jdl file.</td>
+</tr>
+<tr>
+<td>Returns:</td>
+<td>a list with the files in the output sandbox</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Get Proxy Dn"></a>Get Proxy Dn</td>
+  <td class="arg"></td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description: &nbsp; &nbsp;Get user's proxy DN.</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments: &nbsp; &nbsp; &nbsp;none.</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns: &nbsp; &nbsp; &nbsp; &nbsp;The user's proxy DN.</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Get Status With Filter"></a>Get Status With Filter</td>
+  <td class="arg">ce_endpoint, filter_type1, filter_data1, filter_type2=None, filter_data2=None</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Return the current statuses of jobs,with the use of the glite-ce-job-status command and a filter</td>
+</tr>
+<tr>
+<td></td>
+<td>This function will NOT wait until the job is in a final state.</td>
+</tr>
+<tr>
+<td></td>
+<td>filter_type2 and filter_data2 are optional</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>ce_endpoint</td>
+<td>the cream endpoint being questioned</td>
+</tr>
+<tr>
+<td></td>
+<td>filter_type1/2</td>
+<td>the filter being used, one of "from", "to", or "status"</td>
+</tr>
+<tr>
+<td></td>
+<td>filter_data1/2</td>
+<td>the corresponding's filter data, either a date (as accepted from the glite</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>status command "YYYY-MM-DD HH:mm:ss" or a set of job statuses e.g. "DONE-OK:DONE-FAILED"</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>list with corresponding job ids and statuses</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Get Time In Status Format"></a>Get Time In Status Format</td>
+  <td class="arg"></td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Returns the time in the format accepted by glite-ce-job-status</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>N/A</td>
+<td>N/A</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>string (containing the time-date in format YYYY-MM-DD HH:mm:ss)</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Hostnumber Jdl"></a>Hostnumber Jdl</td>
+  <td class="arg">vo, hostnumber, output_dir</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Attribute checking jdl file.Sets the jdl attribute "HostNumber" to the given number.</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>vo</td>
+<td>virtual organisation</td>
+</tr>
+<tr>
+<td></td>
+<td>hostnumber</td>
+<td>jdl attribute</td>
+</tr>
+<tr>
+<td></td>
+<td>output_dir</td>
+<td>the directory to put the file in</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>Temporary file name.</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Isb Baseuri Jdl"></a>Isb Baseuri Jdl</td>
+  <td class="arg">vo, gridftp_server, gridftp_path, uploaded_file_name, output_dir</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>File transfer checking jdl file. Store input files to a gridftp server,and use the jdl attribute</td>
+</tr>
+<tr>
+<td></td>
+<td>InputSandboxBaseURI to fetch them.</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>vo</td>
+<td>virtual organisation</td>
+</tr>
+<tr>
+<td></td>
+<td>gridftp_server</td>
+<td>gridftp server to set ISBBaseURI</td>
+</tr>
+<tr>
+<td></td>
+<td>gridftp_path</td>
+<td>gridftp path to set ISBBaseURI</td>
+</tr>
+<tr>
+<td></td>
+<td>uploaded_file_name</td>
+<td>file name of the uploaded file</td>
+</tr>
+<tr>
+<td></td>
+<td>output_dir</td>
+<td>the directory to put the file in</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>Temporary file name.</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Isb Client To Ce Jdl"></a>Isb Client To Ce Jdl</td>
+  <td class="arg">vo, output_dir</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>File transfer checking jdl file. Stage input files from client to CE node.</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>vo</td>
+<td>virtual organisation</td>
+</tr>
+<tr>
+<td></td>
+<td>output_dir</td>
+<td>the directory to put the file in</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>Temporary jdl file name,temporary shell script file name.</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Isb Gsiftp To Ce Jdl"></a>Isb Gsiftp To Ce Jdl</td>
+  <td class="arg">vo, gridftp_server, gridftp_path, uploaded_file_name, output_dir</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>File transfer checking jdl file. Store input files to a gridftp server,and use the jdl attribute</td>
+</tr>
+<tr>
+<td></td>
+<td>InputSandbox to fetch them.</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>vo</td>
+<td>virtual organisation</td>
+</tr>
+<tr>
+<td></td>
+<td>gridftp_server</td>
+<td>gridftp server to set ISBBaseURI</td>
+</tr>
+<tr>
+<td></td>
+<td>gridftp_path</td>
+<td>gridftp path to set ISBBaseURI</td>
+</tr>
+<tr>
+<td></td>
+<td>uploaded_file_name</td>
+<td>file name of the uploaded file</td>
+</tr>
+<tr>
+<td></td>
+<td>output_dir</td>
+<td>the directory to put the file in</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>Temporary file name.</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Job Status Should Be"></a>Job Status Should Be</td>
+  <td class="arg">jid, status</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Check that the given job's status is the one given.</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>jid</td>
+<td>job identifier</td>
+</tr>
+<tr>
+<td></td>
+<td>status</td>
+<td>the status comparing to</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>Nothing</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Jobdbadminpurger"></a>Jobdbadminpurger</td>
+  <td class="arg">jid, ce_endpoint, db_user, db_pass, middleware_version</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Purge a job using the JobDBAdminPurger.sh script, run on cream host</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>jid</td>
+<td>the job to purge job id as returned by glite-ce-job-submit</td>
+</tr>
+<tr>
+<td></td>
+<td>ce_endpoint</td>
+<td>the host of the cream service</td>
+</tr>
+<tr>
+<td></td>
+<td>db_user</td>
+<td>cream's db user</td>
+</tr>
+<tr>
+<td></td>
+<td>db_pass</td>
+<td>aforementioned user's db pass</td>
+</tr>
+<tr>
+<td></td>
+<td>middleware_version</td>
+<td>the middleware version, either "EMI1" or "EMI2"</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>nothing</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Lcg Cp"></a>Lcg Cp</td>
+  <td class="arg">vo, identifier, local_fname</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Copy a file from an SE to localhost,using lcg-cp.</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>Note: without the LCG_GFAL_INFOSYS variable set, this</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>keyword will NOT work.</td>
+<td></td>
+</tr>
+<tr>
+<td>Arguments:</td>
+<td>vo</td>
+<td>virtual organisation</td>
+</tr>
+<tr>
+<td></td>
+<td>identifier</td>
+<td>lfn or guid to download</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>Must include lfn: or guid: at the start</td>
+</tr>
+<tr>
+<td></td>
+<td>local_fname</td>
+<td>local file name to use</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>Nothing.</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Lcg Cr"></a>Lcg Cr</td>
+  <td class="arg">vo, local_fname, storage_element, lfn</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Upload a file to an SE,using lcg-cr.</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>vo</td>
+<td>virtual organisation</td>
+</tr>
+<tr>
+<td></td>
+<td>local_fname</td>
+<td>local file's name to upload</td>
+</tr>
+<tr>
+<td></td>
+<td>storage_element</td>
+<td>storage element to be used</td>
+</tr>
+<tr>
+<td></td>
+<td>lfn</td>
+<td>the logical file name to use</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>Nothing.</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Lcg Del"></a>Lcg Del</td>
+  <td class="arg">vo, lfn</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Delete all replicas of a file and its LFC entry,using lcg-del.</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>vo</td>
+<td>virtual organisation</td>
+</tr>
+<tr>
+<td></td>
+<td>lfn</td>
+<td>logical file name to delete</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>Nothing.</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Ldap Search"></a>Ldap Search</td>
+  <td class="arg">host, port, search_base, search_filter</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Perform a simple ldapsearch. The option -LLL is always set.</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>host</td>
+<td>the ldap host</td>
+</tr>
+<tr>
+<td></td>
+<td>port</td>
+<td>the ldap listening port</td>
+</tr>
+<tr>
+<td></td>
+<td>search_base</td>
+<td>the search base</td>
+</tr>
+<tr>
+<td></td>
+<td>search_filter</td>
+<td>the search filter</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>The commands output.</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Lfc Ls"></a>Lfc Ls</td>
+  <td class="arg">lfn_path</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>List an lfn,using lfc-ls.</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>lfn_path</td>
+<td>imaginary lfc path</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>List containing all the files.</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Lfc Mkdir"></a>Lfc Mkdir</td>
+  <td class="arg">lfn_path</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Create a folder in the LFC,using lfc-mkdir.</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>lfn_path</td>
+<td>imaginary lfc path</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>Nothing.</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Lfc Rmdir"></a>Lfc Rmdir</td>
+  <td class="arg">lfn_path</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Delete a folder in the LFC,using lfc-rm -r.</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>lfn_path</td>
+<td>imaginary lfc path</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>Nothing.</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="List Jobs"></a>List Jobs</td>
+  <td class="arg">ce_endpoint</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>List the jobs not purged by the specified cream endpoint for the user executing the command.</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>ce_endpoint</td>
+<td>cream endpoint.</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>a list containing all the relevant job ids</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="List Proxy Sandbox"></a>List Proxy Sandbox</td>
+  <td class="arg">ce_endpoint, job_status</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Check the presense (or not) of a delegation id in db queries contents</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>ce_endpoint</td>
+<td>the cream endpoint</td>
+</tr>
+<tr>
+<td></td>
+<td>job_status</td>
+<td>a job's verbose status</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>a list with the contents of the directory</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Localhost Output Jdl"></a>Localhost Output Jdl</td>
+  <td class="arg">vo, output_dir</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>File transfer checking jdl file. Stage files to the CE node (<a href="gsiftp://localhost">gsiftp://localhost</a>).</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>vo</td>
+<td>virtual organisation</td>
+</tr>
+<tr>
+<td></td>
+<td>output_dir</td>
+<td>the directory to put the file in</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>Temporary file name.</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Modify Cream Config Xml"></a>Modify Cream Config Xml</td>
+  <td class="arg">ce_endpoint, attr, val</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Modify the given attribute of the cream config xml file</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>ce_endpoint</td>
+<td>the cream endpoint</td>
+</tr>
+<tr>
+<td></td>
+<td>attr</td>
+<td>the option to change it's value</td>
+</tr>
+<tr>
+<td></td>
+<td>val</td>
+<td>the value to set it</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>Nothing (raises exception upon error or if attr isn't found)</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Multiple Lcg Cp"></a>Multiple Lcg Cp</td>
+  <td class="arg">vo, identifiers, id_type, output_dir</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Copy a file from an SE to localhost,using lcg-cp.</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>vo</td>
+<td>virtual organisation</td>
+</tr>
+<tr>
+<td></td>
+<td>identifiers</td>
+<td>list of lfns or guids to download</td>
+</tr>
+<tr>
+<td></td>
+<td>id_type</td>
+<td>either lfn or guid</td>
+</tr>
+<tr>
+<td></td>
+<td>output_dir</td>
+<td>the directory where the files will be placed</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>List of files downloaded</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Osb Basedesturi Jdl"></a>Osb Basedesturi Jdl</td>
+  <td class="arg">vo, gridftp_server, gridftp_path, output_dir</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>File transfer checking jdl file. Stage output files to a gridftp server,with the use of the</td>
+</tr>
+<tr>
+<td></td>
+<td>OutputSandboxBaseDestURI jdl attribute.</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>vo</td>
+<td>virtual organisation</td>
+</tr>
+<tr>
+<td></td>
+<td>gridftp_server</td>
+<td>gridftp server for BaseDestURI</td>
+</tr>
+<tr>
+<td></td>
+<td>gridftp_path</td>
+<td>gridftp path for BaseDestURI</td>
+</tr>
+<tr>
+<td></td>
+<td>output_dir</td>
+<td>the directory to put the file in</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>Temporary file name.</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Osb Desturi Jdl"></a>Osb Desturi Jdl</td>
+  <td class="arg">vo, gridftp_server, gridftp_path, output_dir</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>File transfer checking jdl file. Stage output files to a gridftp server,with the use of the</td>
+</tr>
+<tr>
+<td></td>
+<td>OutputSandboxDestURI jdl attribute.</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>vo</td>
+<td>virtual organisation</td>
+</tr>
+<tr>
+<td></td>
+<td>gridftp_server</td>
+<td>gridftp server to set DestURI</td>
+</tr>
+<tr>
+<td></td>
+<td>gridftp_path</td>
+<td>gridftp path to set DestURI</td>
+</tr>
+<tr>
+<td></td>
+<td>output_dir</td>
+<td>the directory to put the file in</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>Temporary file name.</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Output Data Jdl"></a>Output Data Jdl</td>
+  <td class="arg">vo, output_dir, gridftp_server=None, lfn_dir=None, lfc=None, infosys=None</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Attribute checking jdl file. Uses a combination of the output data attributes.</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>vo</td>
+<td>virtual organisation</td>
+</tr>
+<tr>
+<td></td>
+<td>output_dir</td>
+<td>the directory to put the file in</td>
+</tr>
+<tr>
+<td></td>
+<td>lfc</td>
+<td>the value to set the environmental variable LFC_HOST on the WN</td>
+</tr>
+<tr>
+<td></td>
+<td>infosys</td>
+<td>the value to set the environmental variable LCG_GFAL_INFOSYS on the WN</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>Temporary jdl file name,temporary shell script file name.</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Prologue Jdl"></a>Prologue Jdl</td>
+  <td class="arg">vo, output_dir</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Attribute checking jdl file. Use the prologue argument and execute a prologue script.</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>vo</td>
+<td>virtual organisation</td>
+</tr>
+<tr>
+<td></td>
+<td>output_dir</td>
+<td>the directory to put the file in</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>Temporary jdl file name,temporary shell script file name.,temporary prologue script.</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Proxy Info"></a>Proxy Info</td>
+  <td class="arg"></td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description: &nbsp; &nbsp;Read user's proxy info.</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments: &nbsp; &nbsp; &nbsp;None.</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns: &nbsp; &nbsp; &nbsp; &nbsp;Command's output.</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Purge All Jobs"></a>Purge All Jobs</td>
+  <td class="arg">ce_endpoint</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Purge all the user's jobs in the given cream endpoint.</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>ce_endpoint</td>
+<td>cream endpoint.</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>nothing.</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Purge Job"></a>Purge Job</td>
+  <td class="arg">jid, ce_endpoint</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Purge the job with the corresponding jid at the given CREAM endpoint</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>jid</td>
+<td>job id returned by job submit operation</td>
+</tr>
+<tr>
+<td></td>
+<td>ce_endpoint</td>
+<td>the CREAM endpoint</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>nothing.</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Qdel Job"></a>Qdel Job</td>
+  <td class="arg">jid, torque_host</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Manually qdel a job.</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>jid</td>
+<td>job identifier</td>
+</tr>
+<tr>
+<td></td>
+<td>cream_host</td>
+<td>the server hosting torque, either ip or name</td>
+</tr>
+<tr>
+<td></td>
+<td>cream_admin_user</td>
+<td>a user exiting on the torque host, having admin priviledges</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>Nothing</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Renew Proxy"></a>Renew Proxy</td>
+  <td class="arg">ce_endpoint, deleg_id</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Renew a delegated proxy in a CREAM endpoint</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>ce_endpoint</td>
+<td>the CREAM endpoint</td>
+</tr>
+<tr>
+<td></td>
+<td>deleg_id</td>
+<td>delegation id to renew</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>nothing</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Reset Cream Config Xml"></a>Reset Cream Config Xml</td>
+  <td class="arg">ce_endpoint</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Reset the cream config xml file to the original</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>ce_endpoint</td>
+<td>the cream endpoint</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>Nothing</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Reset Limiter Threshold"></a>Reset Limiter Threshold</td>
+  <td class="arg">ce_endpoint, middleware_version</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Reset the cream limiter perl script to the original unmodified one</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>ce_endpoint</td>
+<td>The cream host</td>
+</tr>
+<tr>
+<td></td>
+<td>middleware_version</td>
+<td>The middleware version, either "EMI1" or "EMI2"</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>Nothing</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Restart Cream"></a>Restart Cream</td>
+  <td class="arg">ce_endpoint</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Restart the tomcat service, thus restarting cream</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>ce_endpoint</td>
+<td>the cream endpoint</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>Nothing (raises exception upon error or if attr isn't found)</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Resume All Jobs"></a>Resume All Jobs</td>
+  <td class="arg">ce_endpoint</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Suspend all the user's jobs in the given cream endpoint.</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>ce_endpoint</td>
+<td>cream endpoint.</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>nothing.</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Resume Job"></a>Resume Job</td>
+  <td class="arg">job_id</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Resumes the given (previously suspended) job.</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>job id</td>
+<td>as returned by the submit operation.</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>nothing.</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Save Batch Job Submission Script Off"></a>Save Batch Job Submission Script Off</td>
+  <td class="arg">ce_endpoint, version</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Modify blah_common_submit_functions.sh in order to NOT save the job submission script</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>ce_endpoint</td>
+<td>the cream endpoint</td>
+</tr>
+<tr>
+<td></td>
+<td>version</td>
+<td>EMI1 or EMI2 (to determine the path of the script file)</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>Nothing (raises exception upon error)</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Save Batch Job Submission Script On"></a>Save Batch Job Submission Script On</td>
+  <td class="arg">ce_endpoint, version</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Modify blah_common_submit_functions.sh in order to save the job submission script</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>ce_endpoint</td>
+<td>the cream endpoint</td>
+</tr>
+<tr>
+<td></td>
+<td>version</td>
+<td>EMI1 or EMI2 (to determine the path of the script file)</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>Nothing (raises exception upon error)</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Send Signal To Process"></a>Send Signal To Process</td>
+  <td class="arg">pid, sigNo</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Send a process a certain signal.</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>pid</td>
+<td>the proc's pid</td>
+</tr>
+<tr>
+<td></td>
+<td>sigNo</td>
+<td>signal number to send</td>
+</tr>
+<tr>
+<td>Returns:</td>
+<td>nothing</td>
+<td></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Set Limiter Threshold"></a>Set Limiter Threshold</td>
+  <td class="arg">thresh_name, thresh_value, ce_endpoint, middleware_version</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Set one threshold of the cream limiter perl script</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>thresh_name</td>
+<td>The threshold's name</td>
+</tr>
+<tr>
+<td></td>
+<td>thresh_value</td>
+<td>The threshold's value</td>
+</tr>
+<tr>
+<td></td>
+<td>ce_endpoint</td>
+<td>The cream host</td>
+</tr>
+<tr>
+<td></td>
+<td>middleware_version</td>
+<td>The middleware version, either "EMI1" or "EMI2"</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>Nothing</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Simple Jdl"></a>Simple Jdl</td>
+  <td class="arg">vo, output_dir</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Simple jdl file.Executes /bin/uname -a.</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>vo</td>
+<td>virtual organisation</td>
+</tr>
+<tr>
+<td></td>
+<td>output_dir</td>
+<td>the directory to put the file in</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>Temporary file name.</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Sleep Jdl"></a>Sleep Jdl</td>
+  <td class="arg">vo, secs, output_dir</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Simple jdl file.Executes /bin/sleep for the defined number of seconds.</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>vo</td>
+<td>virtual organisation</td>
+</tr>
+<tr>
+<td></td>
+<td>secs</td>
+<td>seconds to sleep</td>
+</tr>
+<tr>
+<td></td>
+<td>output_dir</td>
+<td>the directory to put the file in</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>Temporary file name.</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Smpgranularity Jdl"></a>Smpgranularity Jdl</td>
+  <td class="arg">vo, smpgranularity, output_dir</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Attribute checking jdl file.Sets the jdl attribute "SMPGranularity" to the given number.</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>vo</td>
+<td>virtual organisation</td>
+</tr>
+<tr>
+<td></td>
+<td>smpgranularity</td>
+<td>jdl attribute</td>
+</tr>
+<tr>
+<td></td>
+<td>output_dir</td>
+<td>the directory to put the file in</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>Temporary file name.</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Start Old Blparser"></a>Start Old Blparser</td>
+  <td class="arg">host</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Start the old blparser service</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>host</td>
+<td>the service's host</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>Nothing (raises exception upon error)</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Stop Old Blparser"></a>Stop Old Blparser</td>
+  <td class="arg">host</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Stop the old blparser service</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>host</td>
+<td>the service's host</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>Nothing (raises exception upon error)</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="String Should Contain"></a>String Should Contain</td>
+  <td class="arg">string, search_string</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Check whether the given string contains the given substring.</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>string</td>
+<td>string haystack</td>
+</tr>
+<tr>
+<td></td>
+<td>search_string</td>
+<td>string needle</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>True or raise error</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Submit And Wait"></a>Submit And Wait</td>
+  <td class="arg">jdl_path=None, ce_endpoint=None, delegId=None</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Submit a job and wait until it finishes.</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>Same as submit_job.</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>(int,string) as jid and final job state.</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Submit Job"></a>Submit Job</td>
+  <td class="arg">jdl_path, ce_endpoint, delegId=None</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Submit a job with automatic or explicit delegation and return it's job id.</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>jdl_path</td>
+<td>path to the jdl file</td>
+</tr>
+<tr>
+<td></td>
+<td>ce_endpoint</td>
+<td>the cream endpoint,containing the queue</td>
+</tr>
+<tr>
+<td></td>
+<td>delegId</td>
+<td>if specified,uses the given delegation id, else it uses automatic delegation</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>the resulting cream job id as a string</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Suspend All Jobs"></a>Suspend All Jobs</td>
+  <td class="arg">ce_endpoint</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Suspend all the user's jobs in the given cream endpoint.</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>ce_endpoint</td>
+<td>cream endpoint.</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>nothing.</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Suspend Job"></a>Suspend Job</td>
+  <td class="arg">job_id</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Suspends the given job.</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>job id</td>
+<td>as returned by the submit operation.</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>nothing.</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Uberftp Upload"></a>Uberftp Upload</td>
+  <td class="arg">gridftp_server, gridftp_path, local_file_path</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Upload a file to a gridftp server with uberftp</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>gridftp_server</td>
+<td>the gridftp server hostname</td>
+</tr>
+<tr>
+<td></td>
+<td>gridftp_path</td>
+<td>the path in the gridftp server</td>
+</tr>
+<tr>
+<td></td>
+<td>local_file_path</td>
+<td>the full path of the local path</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>The output of the command</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Unban User Argus"></a>Unban User Argus</td>
+  <td class="arg">dn, argus_host</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Un-Ban the specified DN using pap-admin cli on the argus host</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>dn</td>
+<td>Distinguished Name to be added</td>
+</tr>
+<tr>
+<td></td>
+<td>argus_host</td>
+<td>the argus host</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>Nothing (raises exception upon error)</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Unban User Gjaf"></a>Unban User Gjaf</td>
+  <td class="arg">dn, ce_endpoint</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Remove the specified DN as a CREAM banned user (remove it from /etc/lcas/ban_users.db)</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>dn</td>
+<td>Distinguished Name to be added</td>
+</tr>
+<tr>
+<td></td>
+<td>ce_endpoint</td>
+<td>the cream endpoint</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>Nothing (raises exception upon error)</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Validate Ce Service Info"></a>Validate Ce Service Info</td>
+  <td class="arg">output</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Validates the output of a glite-ce-service-info command</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>output &nbsp;the output of the method ce_service_info()</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>Nothing (raises exception uppon non-validation)</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Validate Glue"></a>Validate Glue</td>
+  <td class="arg">ce_endpoint, port, bind, glue_version</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Run the glue validator for the designated CREAM endpoint</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>ce_endpoint</td>
+<td>the cream endpoint</td>
+</tr>
+<tr>
+<td></td>
+<td>port</td>
+<td>the ldap listening port</td>
+</tr>
+<tr>
+<td></td>
+<td>bind</td>
+<td>the point where glue validator should bind</td>
+</tr>
+<tr>
+<td></td>
+<td>glue_version</td>
+<td>the glue version to be tested by glue validator</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>Nothing (raises exception upon error)</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Validate Job Status"></a>Validate Job Status</td>
+  <td class="arg">output, verbosity</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Validates the output of a glite-ce-job-status command</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>output</td>
+<td>the output of a job status command</td>
+</tr>
+<tr>
+<td></td>
+<td>verbosity</td>
+<td>the verbosity of the status command</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>Nothing (raises exception uppon non-validation)</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Wait For Status"></a>Wait For Status</td>
+  <td class="arg">jid, status, timeout=3600</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Wait for the given job to reach the given status.</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>jid</td>
+<td>jod identifier</td>
+</tr>
+<tr>
+<td></td>
+<td>status</td>
+<td>the status waiting for</td>
+</tr>
+<tr>
+<td></td>
+<td>timeout</td>
+<td>timeout after which the operation fails (in seconds)</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>Defaults in one hour timeout.</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>Nothing</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Wholenodes Jdl"></a>Wholenodes Jdl</td>
+  <td class="arg">vo, wholenodes, output_dir</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Attribute checking jdl file.Sets the jdl attribute "WholeNodes" to the given value.</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>vo &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;virtual organisation</td>
+</tr>
+<tr>
+<td></td>
+<td>wholenodes &nbsp; &nbsp; &nbsp;jdl attribute</td>
+</tr>
+<tr>
+<td></td>
+<td>output_dir &nbsp; &nbsp; &nbsp;the directory to put the file in</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>Temporary file name.</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Wms Get Final Job Status"></a>Wms Get Final Job Status</td>
+  <td class="arg">job_id, verbosity=1</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Return the final status of a wms job,with the use of the glite-wms-job-status command.</td>
+</tr>
+<tr>
+<td></td>
+<td>This function WILL wait until the job is in a final state.</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>job_id</td>
+<td>the job id,as returned by the submit operation.</td>
+</tr>
+<tr>
+<td></td>
+<td>verbosity</td>
+<td>the status operation's verbosity. One of 0,1,2,3</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>job's status as a string.</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Wms Get Job Status"></a>Wms Get Job Status</td>
+  <td class="arg">job_id, verbosity=1</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Return the current status of a wms job,with the use of the glite-wms-job-status command.</td>
+</tr>
+<tr>
+<td></td>
+<td>This function will NOT wait until the job is in a final state.</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>job_id</td>
+<td>the job id,as returned by the submit operation.</td>
+</tr>
+<tr>
+<td></td>
+<td>verbosity</td>
+<td>the status operation's verbosity. One of 0,1,2,3</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>job's status as a string.</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Wms Job Logging Info"></a>Wms Job Logging Info</td>
+  <td class="arg">job_id, verbosity=1</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Return the current status of a wms job,with the use of the glite-wms-job-status command.</td>
+</tr>
+<tr>
+<td></td>
+<td>This function will NOT wait until the job is in a final state.</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>job_id</td>
+<td>the job id,as returned by the submit operation.</td>
+</tr>
+<tr>
+<td></td>
+<td>verbosity</td>
+<td>the status operation's verbosity. One of 0,1,2,3</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>job's status as a string.</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+  <td class="kw"><a name="Wms Job Submit"></a>Wms Job Submit</td>
+  <td class="arg">jdl_path, wmproxy_endpoint=None, ce_endpoint=None, delegId=None</td>
+  <td class="doc"><table border="1" class="doc">
+<tr>
+<td>Description:</td>
+<td>Submit a job to the WMS, with automatic or explicit delegation and return it's job id.</td>
+</tr>
+<tr>
+<td></td>
+<td>NOTE: this method only supports some basic options of the Workload Management System!</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Arguments:</td>
+<td>jdl_path</td>
+<td>path to the jdl file</td>
+</tr>
+<tr>
+<td></td>
+<td>ce_endpoint</td>
+<td>the cream endpoint,containing the queue</td>
+</tr>
+<tr>
+<td></td>
+<td>wmproxy_endpoint</td>
+<td>the wmproxy endpoint</td>
+</tr>
+<tr>
+<td></td>
+<td>delegId</td>
+<td>if specified,uses the given delegation id, else it uses automatic delegation</td>
+</tr>
+</table>
+<br />
+<table border="1" class="doc">
+<tr>
+<td>Returns:</td>
+<td>the resulting cream job id as a string</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+
+</body>
+</html>
