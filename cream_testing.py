@@ -113,84 +113,85 @@ Implemented methods enumeration:
  32 lfc_rmdir
  33 test_jdls
  34 simple_jdl
- 35 sleep_jdl
- 36 cpunumber_jdl
- 37 hostnumber_jdl
- 38 wholenodes_jdl
- 39 smpgranularity_jdl
- 40 combo_jdl
- 41 localhost_output_jdl
- 42 environment_jdl
- 43 osb_basedesturi_jdl
- 44 isb_client_to_ce_jdl
- 45 osb_desturi_jdl
- 46 prologue_jdl
- 47 epilogue_jdl
- 48 isb_baseuri_jdl
- 49 create_dummy_script
- 50 isb_gsiftp_to_ce_jdl
- 51 output_data_jdl
- 52 wait_for_status
- 53 job_status_should_be
- 54 qdel_job
- 55 test_qdel
- 56 execute_uberftp_command
- 57 uberftp_upload
- 58 ce_service_info
- 59 validate_ce_service_info
- 60 proxy_info
- 61 get_proxy_dn
- 62 enable_cream_admin
- 63 disable_cream_admin
- 64 allowed_submission
- 65 enable_submission
- 66 disable_submission
- 67 purge_job
- 68 get_job_sb
- 69 set_limiter_threshold
- 70 reset_limiter_threshold
- 71 ban_user_gjaf
- 72 unban_user_gjaf
- 73 change_sandbox_transfer_method
- 74 validate_glue
- 75 modify_cream_config_xml
- 76 reset_cream_config_xml
- 77 restart_cream
- 78 get_deleg_id_from_status
- 79 list_proxy_sandbox
- 80 check_delegation_id_in_filesystem
- 81 ban_user_argus
- 82 unban_user_argus
- 83 validate_job_status
- 84 get_time_in_status_format
- 85 get_status_with_filter
- 86 get_guid
- 87 multiple_lcg_cp
- 88 files_should_not_be_empty
- 89 bkill_job
- 90 send_signal_to_process
- 91 jobdbadminpurger
- 92 execute_noninteractive_ssh_com
- 93 _enisc
- 94 get_delegation_id
- 95 renew_proxy
- 96 save_batch_job_submission_script_on
- 97 save_batch_job_submission_script_off
- 98 cpu_allocation_jdl
- 99 get_arch_smp_size
-100 cpu_allocation_test
-101 string_should_contain
-102 _log_to_screen
-103 delegation_info
-104 ldap_search
-105 check_resource_bdii_published_values
-106 wms_job_submit
-107 wms_get_job_status
-108 wms_get_final_job_status
-109 wms_job_logging_info
-110 check_wms_logging_info
-111 stop_old_blparser
-112 start_old_blparser
+ 35 simple_wms_jdl
+ 36 sleep_jdl
+ 37 cpunumber_jdl
+ 38 hostnumber_jdl
+ 39 wholenodes_jdl
+ 40 smpgranularity_jdl
+ 41 combo_jdl
+ 42 localhost_output_jdl
+ 43 environment_jdl
+ 44 osb_basedesturi_jdl
+ 45 isb_client_to_ce_jdl
+ 46 osb_desturi_jdl
+ 47 prologue_jdl
+ 48 epilogue_jdl
+ 49 isb_baseuri_jdl
+ 50 create_dummy_script
+ 51 isb_gsiftp_to_ce_jdl
+ 52 output_data_jdl
+ 53 wait_for_status
+ 54 job_status_should_be
+ 55 qdel_job
+ 56 test_qdel
+ 57 execute_uberftp_command
+ 58 uberftp_upload
+ 59 ce_service_info
+ 60 validate_ce_service_info
+ 61 proxy_info
+ 62 get_proxy_dn
+ 63 enable_cream_admin
+ 64 disable_cream_admin
+ 65 allowed_submission
+ 66 enable_submission
+ 67 disable_submission
+ 68 purge_job
+ 69 get_job_sb
+ 70 set_limiter_threshold
+ 71 reset_limiter_threshold
+ 72 ban_user_gjaf
+ 73 unban_user_gjaf
+ 74 change_sandbox_transfer_method
+ 75 validate_glue
+ 76 modify_cream_config_xml
+ 77 reset_cream_config_xml
+ 78 restart_cream
+ 79 get_deleg_id_from_status
+ 80 list_proxy_sandbox
+ 81 check_delegation_id_in_filesystem
+ 82 ban_user_argus
+ 83 unban_user_argus
+ 84 validate_job_status
+ 85 get_time_in_status_format
+ 86 get_status_with_filter
+ 87 get_guid
+ 88 multiple_lcg_cp
+ 89 files_should_not_be_empty
+ 90 bkill_job
+ 91 send_signal_to_process
+ 92 jobdbadminpurger
+ 93 execute_noninteractive_ssh_com
+ 94 _enisc
+ 95 get_delegation_id
+ 96 renew_proxy
+ 97 save_batch_job_submission_script_on
+ 98 save_batch_job_submission_script_off
+ 99 cpu_allocation_jdl
+100 get_arch_smp_size
+101 cpu_allocation_test
+102 string_should_contain
+103 _log_to_screen
+104 delegation_info
+105 ldap_search
+106 check_resource_bdii_published_values
+107 wms_job_submit
+108 wms_get_job_status
+109 wms_get_final_job_status
+110 wms_job_logging_info
+111 check_wms_logging_info
+112 stop_old_blparser
+113 start_old_blparser
 
 '''
 
@@ -1263,7 +1264,36 @@ def simple_jdl(vo, output_dir):
         return path
 ##############################################################################################################################
 ##############################################################################################################################
-def sleep_jdl(vo,secs, output_dir):
+def simple_wms_jdl(vo, output_dir):
+        '''
+                |  Description:  |  Simple jdl file.Executes /bin/uname -a.             | \n
+                |  Arguments:    |  vo           |   virtual organisation               |
+                |                |  output_dir   |   the directory to put the file in   | \n
+                |  Returns:      |  Temporary file name.                                |
+        '''
+
+        folder = output_dir
+        identifier = 'simple'
+        name = 'cream_testing-' + str(time.time()) + '-' + identifier + '.jdl'
+        path = folder + '/' + name
+
+        jdl_file = open(path,'w')
+
+        jdl_contents =  'VirtualOrganisation="' + vo + '";\n'\
+                        'Executable="/bin/uname";\n'\
+                        'Arguments="-a";\n'\
+                        'StdOutput="job.out";\n'\
+                        'StdError="job.err";\n'\
+                        'Requirements = " ";\n'
+
+
+        jdl_file.write(jdl_contents)
+        jdl_file.close()
+
+        return path
+##############################################################################################################################
+##############################################################################################################################
+
         '''
                 |  Description: |   Simple jdl file.Executes /bin/sleep for the defined number of seconds.      | \n
                 |  Arguments:   |   vo           |   virtual organisation                                       |
@@ -2471,8 +2501,7 @@ def enable_cream_admin(dn, ce_endpoint):
         sftp = ssh_con.open_sftp()
         f = sftp.file(file_path,'a')
 
-        f.write('"' + dn + '"\n')
-        f.write('remove me\n')
+        f.write('"' + dn + '"\n')  
         f.close()
 
         ssh_con.exec_command("touch /etc/grid-security/admin-list")
@@ -2518,9 +2547,9 @@ def disable_cream_admin(dn, ce_endpoint):
                 if len(item) > 2 and "remove me" not in item:
                         f.write(item)
                         f.write('\n')
-
-        f.write("remove me\n")
-        f.close()
+        
+	
+	f.close()
 
         ssh_con.exec_command("touch " + file_path)
         time.sleep(10)
@@ -2805,7 +2834,6 @@ def unban_user_gjaf(dn, ce_endpoint):
                 if len(item) > 2 and "remove me" not in item:
                         f.write(item)
                         f.write('\n')
-        f.write("remove me\n")
         f.close()
 ##############################################################################################################################
 ##############################################################################################################################
@@ -2856,7 +2884,7 @@ def change_sandbox_transfer_method(ce_endpoint):
         ssh_con.exec_command("touch " + file_path)
 ##############################################################################################################################
 ##############################################################################################################################
-def validate_glue(ce_endpoint, port, bind, glue_version):
+def validate_glue(ce_endpoint, port, bind, testsuite_type, glue_version):
         '''
                 |  Description:  |   Run the glue validator for the designated CREAM endpoint                  | \n
                 |  Arguments:    |   ce_endpoint       |      the cream endpoint                               |
@@ -2870,21 +2898,21 @@ def validate_glue(ce_endpoint, port, bind, glue_version):
 
         #svn co http://svnweb.cern.ch/guest/gridinfo/glue-validator/trunk
         #export PYTHONPATH=${PYTHONPATH}:${PWD}/trunk/lib
-        com='svn co http://svnweb.cern.ch/guest/gridinfo/glue-validator/trunk'
-	args = shlex.split(com.encode('ascii'))
-        p = subprocess.Popen( args , stderr=subprocess.STDOUT , stdout=subprocess.PIPE )
-        fPtr=p.stdout
-        output=fPtr.read()
-        p.wait()
-        if p.returncode != 0:
-                raise _error('Command "' + com + '" failed with return code: ' + str(p.returncode) + ' \nCommand reported: ' +  output)
-        else:
-                print 'Command "' + com + '" output follows:'
-                print output
+        #com='svn co http://svnweb.cern.ch/guest/gridinfo/glue-validator/trunk'
+	#args = shlex.split(com.encode('ascii'))
+        #p = subprocess.Popen( args , stderr=subprocess.STDOUT , stdout=subprocess.PIPE )
+        #fPtr=p.stdout
+        #output=fPtr.read()
+        #p.wait()
+        #if p.returncode != 0:
+        #        raise _error('Command "' + com + '" failed with return code: ' + str(p.returncode) + ' \nCommand reported: ' +  output)
+        #else:
+        #        print 'Command "' + com + '" output follows:'
+        #        print output
 
-        os.putenv('PYTHONPATH',str(os.getenv("PYTHONPATH")) + ":trunk/lib")
+        #os.putenv('PYTHONPATH',str(os.getenv("PYTHONPATH")) + ":trunk/lib")
 
-        com='trunk/bin/glue-validator -h ' + cream_host + ' -p ' + port + ' -b ' + bind + ' -t ' + glue_version
+        com='glue-validator -H ' + cream_host + ' -p ' + port + ' -b ' + bind + ' -s ' + testsuite_type + ' -g ' + glue_version
         print "Glue validator command: " + com
 	args = shlex.split(com.encode('ascii'))
         p = subprocess.Popen( args , stderr=subprocess.STDOUT , stdout=subprocess.PIPE )
@@ -2892,17 +2920,17 @@ def validate_glue(ce_endpoint, port, bind, glue_version):
         output=fPtr.read()
         p.wait()
         if p.returncode != 0:
-                com2='rm -rf trunk/'
-	        args2 = shlex.split(com.encode('ascii'))
-                p2 = subprocess.Popen( args , stderr=subprocess.STDOUT , stdout=subprocess.PIPE )
-                fPtr2=p2.stdout
-                output2=fPtr2.read()
-                p2.wait()
-                if p2.returncode != 0:
-                        raise _error('Command "' + com2 + '" failed with return code: ' + str(p2.returncode) + ' \nCommand reported: ' +  output2)
-                else:
-                        print 'Command "' + com2 + '" output follows:'
-                        print output2
+                #com2='rm -rf trunk/'
+	        #args2 = shlex.split(com.encode('ascii'))
+                #p2 = subprocess.Popen( args , stderr=subprocess.STDOUT , stdout=subprocess.PIPE )
+                #fPtr2=p2.stdout
+                #output2=fPtr2.read()
+                #p2.wait()
+                #if p2.returncode != 0:
+                #        raise _error('Command "' + com2 + '" failed with return code: ' + str(p2.returncode) + ' \nCommand reported: ' +  output2)
+                #else:
+                #        print 'Command "' + com2 + '" output follows:'
+                #        print output2
                 raise _error('Command "' + com + '" failed with return code: ' + str(p.returncode) + ' \nCommand reported: ' +  output)
         else:
                 print 'Command "' + com + '" output follows:'
@@ -2910,17 +2938,17 @@ def validate_glue(ce_endpoint, port, bind, glue_version):
 
         retVal = output
 
-        com='rm -rf trunk/'
-	args = shlex.split(com.encode('ascii'))
-        p = subprocess.Popen( args , stderr=subprocess.STDOUT , stdout=subprocess.PIPE )
-        fPtr=p.stdout
-        output=fPtr.read()
-        p.wait()
-        if p.returncode != 0:
-                raise _error('Command "' + com + '" failed with return code: ' + str(p.returncode) + ' \nCommand reported: ' +  output)
-        else:
-                print 'Command "' + com + '" output follows:'
-                print output
+        #com='rm -rf trunk/'
+	#args = shlex.split(com.encode('ascii'))
+        #p = subprocess.Popen( args , stderr=subprocess.STDOUT , stdout=subprocess.PIPE )
+        #fPtr=p.stdout
+        #output=fPtr.read()
+        #p.wait()
+        #if p.returncode != 0:
+        #        raise _error('Command "' + com + '" failed with return code: ' + str(p.returncode) + ' \nCommand reported: ' +  output)
+        #else:
+        #        print 'Command "' + com + '" output follows:'
+        #        print output
 
         return retVal
 ##############################################################################################################################
