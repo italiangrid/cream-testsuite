@@ -4324,6 +4324,8 @@ def cpu_allocation_test(jid, ce_endpoint, test_type=0, wholenodes=0, cpunumber=0
                         string_should_contain(contents, search_str)
                         search_str = 'BSUB -x'
                         string_should_contain(contents, search_str)
+                elif lrms == 'slurm':
+                        print "slurm not supported, some test may fail"
                 else:
                         raise _error('Batch system must be either PBS or LSF but you entered: "' + batch_system + '" (' + lrms + ')')
         elif ttype == 2: # JDL Attributes: WholeNodes=true SMPGranularity=G
@@ -4341,6 +4343,9 @@ def cpu_allocation_test(jid, ce_endpoint, test_type=0, wholenodes=0, cpunumber=0
                         string_should_contain(contents, search_str)
                         search_str = 'BSUB -x'
                         string_should_contain(contents, search_str)
+                elif lrms == 'slurm':
+                        print "slurm not supported, some test may fail"
+
                 else:
                         raise _error('Batch system must be either PBS or LSF but you entered: "' + batch_system + '" (' + lrms + ')')
         elif ttype == 3: # JDL Attributes: WholeNodes=true, HostNumber=H
@@ -4358,6 +4363,8 @@ def cpu_allocation_test(jid, ce_endpoint, test_type=0, wholenodes=0, cpunumber=0
                         string_should_contain(contents, search_str)
                         search_str = 'BSUB -x'
                         string_should_contain(contents, search_str)
+                elif lrms == 'slurm':
+                        print "slurm not supported, some test may fail"
                 else:
                         raise _error('Batch system must be either PBS or LSF but you entered: "' + batch_system + '" (' + lrms + ')')
         elif ttype == 4: # JDL Attributes: WholeNodes=false, SMPGranularity=G, CPUNumber=C
@@ -4376,6 +4383,8 @@ def cpu_allocation_test(jid, ce_endpoint, test_type=0, wholenodes=0, cpunumber=0
                         string_should_contain(contents, search_str)
                         search_string = 'BSUB -R "span[ptile=' + str(smpgranularity) + ']"'
                         string_should_contain(contents, search_str)
+                elif lrms == 'slurm':
+                        print "slurm not supported, some test may fail"
                 else:
                         raise _error('Batch system must be either PBS or LSF but you entered: "' + batch_system + '" (' + lrms + ')')
         elif ttype == 5: # JDL Attributes: WholeNodes=false, HostNumber=H, CPUNumber=C, H>1
@@ -4396,6 +4405,8 @@ def cpu_allocation_test(jid, ce_endpoint, test_type=0, wholenodes=0, cpunumber=0
                         string_should_contain(contents, search_str)
                         search_str = 'BSUB -R "span[ptile=' + str(n) + ']"'
                         string_should_contain(contents, search_str)
+                elif lrms == 'slurm':
+                        print "slurm not supported, some test may fail"
                 else:
                         raise _error('Batch system must be either PBS or LSF but you entered: "' + batch_system + '" (' + lrms + ')')
         elif ttype == 6: # JDL Attributes: WholeNodes=false, CPUNumber=C
@@ -4407,6 +4418,8 @@ def cpu_allocation_test(jid, ce_endpoint, test_type=0, wholenodes=0, cpunumber=0
                 elif lrms == 'lsf':
                         search_str = 'BSUB -n ' + str(cpunumber)
                         string_should_contain(contents, search_str)
+                elif lrms == 'slurm':
+                        print "slurm not supported, some test may fail"
                 else:
                         raise _error('Batch system must be either PBS or LSF but you entered: "' + batch_system + '" (' + lrms + ')')
 
