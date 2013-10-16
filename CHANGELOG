@@ -20,6 +20,8 @@ LIBRARY
 => Added _get_ssh_connection() method
 => _enisc doesn't utilize password's anymore. It expects to be authenticated automagically, through ssh keys.
 => Removed execute_remote_mysql_query()
+=> Added simple_wms_jdl() method
+=> Removed in enable_cream_admin, unban_user_gjaf, ban_user_gjaf method the string remove me that has been wrote in cream configuration file.
 
 ===========
 TEST SUITE
@@ -30,6 +32,8 @@ TEST SUITE
 => Added Resource BDII test case
 => Added Logging and Bookkeeping test case
 => Added Old BLParser Restart test case
+=> Added a field to glue scheme method to determinate the testsuite type (generic| egi-profile)
+=> Modified the LB test to use the simple_wms_JDL generation istead of simple_JDL
 
 ==========
 VARIABLES
