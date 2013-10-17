@@ -1293,7 +1293,7 @@ def simple_wms_jdl(vo, output_dir):
         return path
 ##############################################################################################################################
 ##############################################################################################################################
-
+def sleep_jdl(vo,secs, output_dir):
         '''
                 |  Description: |   Simple jdl file.Executes /bin/sleep for the defined number of seconds.      | \n
                 |  Arguments:   |   vo           |   virtual organisation                                       |
