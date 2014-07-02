@@ -164,8 +164,8 @@ for key, value in all_vars.iteritems():
                         print '      Log level is auto-corrected to DEBUG'
                         log_level = 'DEBUG'
         if key == "batch_system":
-                if value != "pbs" and value != "lsf":
-                        raise _error('Batch system must be either "pbs" or "lsf". You entered: ' + batch_system)
+                if value != "pbs" and value != "lsf" and value != "slurm":
+                        raise _error('Batch system must be either "pbs" or "lsf" or "slurm". You entered: ' + batch_system)
 
 ce_host=ce_endpoint.split(":")[0] #helper
 blparser_host=blparser_host.split(":")[0] #helper, in case it is set to ce_endpoint

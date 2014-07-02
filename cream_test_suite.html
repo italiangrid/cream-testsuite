@@ -2451,6 +2451,20 @@ Internally, ssh is used to connect and execute qstat and qdel on the Torque host
 </tr>
 <tr>
 <td class="name"></td>
+<td>Run Keyword If</td>
+<td>'${batch_system}' == 'slurm'</td>
+<td>Scancel Job</td>
+<td>${job_id}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>${lrms_host}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
 <td>${final_state}=</td>
 <td>Get Final Status</td>
 <td>${job_id}</td>

@@ -16,7 +16,6 @@
 
 #add to pydoc html documentation of this module: <a href="http://www.gnu.org/copyleft/gpl.html" target="_blank"> <img src="http://www.gnu.org/graphics/gplv3-127x51.png"> </a>
 
-
 '''
 Job Handling
 --
@@ -24,7 +23,7 @@ submit_job() get_final_status() get_current_status()
 list_jobs() cancel_job() suspend_job() resume_job()
 cancel_all_jobs() purge_all_jobs() suspend_all_jobs()
 resume_all_jobs() submit_and_wait() get_current_status_verbose()
-wait_for_status() qdel_job() purge_job() get_status_with_filter()
+wait_for_status() qdel_job() scancel_job() purge_job() get_status_with_filter()
 bkill_job() wms_job_submit() wms_get_job_status() 
 wms_get_final_job_status() wms_job_logging_info()
 
@@ -41,7 +40,7 @@ multiple_lcg_cp()
 
 JDL Creation
 --
-test_jdls() simple_jdl()  sleep_jdl() cpunumber_jdl()
+test_jdls() simple_jdl() simple_wms_jdl() sleep_jdl() cpunumber_jdl()
 hostnumber_jdl() wholenodes_jdl() smpgranularity_jdl()
 combo_jdl() localhost_output_jdl() environment_jdl()
 osb_basedesturi_jdl() isb_client_to_ce_jdl() osb_desturi_jdl()
@@ -134,64 +133,65 @@ Implemented methods enumeration:
  53 wait_for_status
  54 job_status_should_be
  55 qdel_job
- 56 test_qdel
- 57 execute_uberftp_command
- 58 uberftp_upload
- 59 ce_service_info
- 60 validate_ce_service_info
- 61 proxy_info
- 62 get_proxy_dn
- 63 enable_cream_admin
- 64 disable_cream_admin
- 65 allowed_submission
- 66 enable_submission
- 67 disable_submission
- 68 purge_job
- 69 get_job_sb
- 70 set_limiter_threshold
- 71 reset_limiter_threshold
- 72 ban_user_gjaf
- 73 unban_user_gjaf
- 74 change_sandbox_transfer_method
- 75 validate_glue
- 76 modify_cream_config_xml
- 77 reset_cream_config_xml
- 78 restart_cream
- 79 get_deleg_id_from_status
- 80 list_proxy_sandbox
- 81 check_delegation_id_in_filesystem
- 82 ban_user_argus
- 83 unban_user_argus
- 84 validate_job_status
- 85 get_time_in_status_format
- 86 get_status_with_filter
- 87 get_guid
- 88 multiple_lcg_cp
- 89 files_should_not_be_empty
- 90 bkill_job
- 91 send_signal_to_process
- 92 jobdbadminpurger
- 93 execute_noninteractive_ssh_com
- 94 _enisc
- 95 get_delegation_id
- 96 renew_proxy
- 97 save_batch_job_submission_script_on
- 98 save_batch_job_submission_script_off
- 99 cpu_allocation_jdl
-100 get_arch_smp_size
-101 cpu_allocation_test
-102 string_should_contain
-103 _log_to_screen
-104 delegation_info
-105 ldap_search
-106 check_resource_bdii_published_values
-107 wms_job_submit
-108 wms_get_job_status
-109 wms_get_final_job_status
-110 wms_job_logging_info
-111 check_wms_logging_info
-112 stop_old_blparser
-113 start_old_blparser
+ 56 scancel_job
+ 57 test_qdel
+ 58 execute_uberftp_command
+ 59 uberftp_upload
+ 60 ce_service_info
+ 61 validate_ce_service_info
+ 62 proxy_info
+ 63 get_proxy_dn
+ 64 enable_cream_admin
+ 65 disable_cream_admin
+ 66 allowed_submission
+ 67 enable_submission
+ 68 disable_submission
+ 69 purge_job
+ 70 get_job_sb
+ 71 set_limiter_threshold
+ 72 reset_limiter_threshold
+ 73 ban_user_gjaf
+ 74 unban_user_gjaf
+ 75 change_sandbox_transfer_method
+ 76 validate_glue
+ 77 modify_cream_config_xml
+ 78 reset_cream_config_xml
+ 79 restart_cream
+ 80 get_deleg_id_from_status
+ 81 list_proxy_sandbox
+ 82 check_delegation_id_in_filesystem
+ 83 ban_user_argus
+ 84 unban_user_argus
+ 85 validate_job_status
+ 86 get_time_in_status_format
+ 87 get_status_with_filter
+ 88 get_guid
+ 89 multiple_lcg_cp
+ 90 files_should_not_be_empty
+ 91 bkill_job
+ 92 send_signal_to_process
+ 93 jobdbadminpurger
+ 94 execute_noninteractive_ssh_com
+ 95 _enisc
+ 96 get_delegation_id
+ 97 renew_proxy
+ 98 save_batch_job_submission_script_on
+ 99 save_batch_job_submission_script_off
+100 cpu_allocation_jdl
+101 get_arch_smp_size
+102 cpu_allocation_test
+103 string_should_contain
+104 _log_to_screen
+105 delegation_info
+106 ldap_search
+107 check_resource_bdii_published_values
+108 wms_job_submit
+109 wms_get_job_status
+110 wms_get_final_job_status
+111 wms_job_logging_info
+112 check_wms_logging_info
+113 stop_old_blparser
+114 start_old_blparser
 
 '''
 
@@ -2154,6 +2154,60 @@ def qdel_job(jid, torque_host):
 #        qdel_job(jid,torque_host,torque_admin_user)
 ##############################################################################################################################
 ##############################################################################################################################
+def scancel_job(jid, slurm_host):
+        '''
+                |  Description: |   Manually scancel a job.                                                                     | \n
+                |  Arguments:   |   jid                |     job identifier                                                     |
+                |               |   cream_host         |     the server hosting torque, either ip or name                       |
+                |               |   cream_admin_user   |     a user exiting on the torque host, having admin priviledges        | \n
+                |  Returns:     |   Nothing                                                                                     |
+        '''
+
+        num_jid = jid.split("CREAM")[1]
+
+        print "Job ID is: " + jid
+
+        ssh_con = _get_ssh_connection(slurm_host, 'root')
+
+        time.sleep(10)  #a "safe" threshold to wait for the job to be registered in torque (i.e.: visible through qstat)
+
+        stdin, stdout, stderr = ssh_con.exec_command("squeue -o \"%i %a %j\"")
+
+        print "SQUEUE stdout and stderr output follow"
+
+        output = stdout.read()
+        print output
+        error = stderr.readlines()
+        print error
+
+        slurm_jid = "not_set"
+        for line in output.split('\n'):
+                if num_jid in line:
+                        slurm_jid = line.split(' ')[0]   
+                        print "slurm jid is: " + slurm_jid
+                       # slurm_jid = slurm_jid.split('.')[0]
+                       # print "SLURM jid kept is: " + slurm_jid
+
+        if slurm_jid is "not_set":
+                raise _error("Cream job with jid " + jid + " has not been found on the Slurm server! (squeue didn't report it)")
+
+        stdin, stdout, stderr = ssh_con.exec_command("scancel " + slurm_jid)
+
+        print "SCANCEL stdout and stderr output follow"
+
+        output = stdout.read()
+        print output
+        error = stderr.readlines()
+        print error
+
+        for item in error:
+                if 'error' in item.lower():
+                        raise _error('An error was reported during the scancel operation. Check report!')
+
+        print "Cream job with jid " + jid + " and slurm jid " + slurm_jid + " has been deleted!"
+
+##############################################################################################################################
+##############################################################################################################################
 def execute_uberftp_command(uberftp_command, gridftp_server, gridftp_path):
         '''
                 |  Description: |    Execute an uberftp command on a gridftp url                                                 | \n
@@ -2501,7 +2555,7 @@ def enable_cream_admin(dn, ce_endpoint):
         sftp = ssh_con.open_sftp()
         f = sftp.file(file_path,'a')
 
-        f.write('"' + dn + '"\n')  
+        f.write('"' + dn + '"\n')
         f.close()
 
         ssh_con.exec_command("touch /etc/grid-security/admin-list")
@@ -2547,8 +2601,6 @@ def disable_cream_admin(dn, ce_endpoint):
                 if len(item) > 2 and "remove me" not in item:
                         f.write(item)
                         f.write('\n')
-        
-	
 	f.close()
 
         ssh_con.exec_command("touch " + file_path)
@@ -4275,8 +4327,8 @@ def cpu_allocation_test(jid, ce_endpoint, test_type=0, wholenodes=0, cpunumber=0
         if str(wholenodes).lower() != 'true' and str(wholenodes).lower() != 'false':
                 raise _error('The WholeNodes attribute must be either True or False, but you entered: "' + wholenodes + '"')
 
-        if str(batch_system).lower() != 'pbs' and str(batch_system).lower() != 'lsf':
-                raise _error('The Batch System attribute must be either "PBS" or "LSF", but you entered: "' + batch_system + '"')
+        if str(batch_system).lower() != 'pbs' and str(batch_system).lower() != 'lsf' and  str(batch_system).lower() != 'slurm':
+                raise _error('The Batch System attribute must be either "PBS" "LSF" or "SLURM", but you entered: "' + batch_system + '"')
 
         lrms = batch_system.encode('ascii').lower()
 
@@ -4325,9 +4377,14 @@ def cpu_allocation_test(jid, ce_endpoint, test_type=0, wholenodes=0, cpunumber=0
                         search_str = 'BSUB -x'
                         string_should_contain(contents, search_str)
                 elif lrms == 'slurm':
-                        print "slurm not supported, some test may fail"
+                        search_str = 'SBATCH -N ' + str(hostnumber)
+		        string_should_contain(contents, search_str)
+                        search_str = 'SBATCH --ntasks-per-node ' + str(smpsize)
+			string_should_contain(contents, search_str)
+                        search_str = 'SBATCH --exclusive'
+                        string_should_contain(contents, search_str)
                 else:
-                        raise _error('Batch system must be either PBS or LSF but you entered: "' + batch_system + '" (' + lrms + ')')
+                        raise _error('Batch system must be either PBS, LSF or SLURM but you entered: "' + batch_system + '" (' + lrms + ')')
         elif ttype == 2: # JDL Attributes: WholeNodes=true SMPGranularity=G
                 # Verification for LSF: BSUB -n S, BSUB -R "span[hosts=1]", BSUB -x
                 # Verification for PBS: PBS -l nodes=1:ppn=S, PBS -W x=NACCESSPOLICY:SINGLEJOB
@@ -4344,10 +4401,14 @@ def cpu_allocation_test(jid, ce_endpoint, test_type=0, wholenodes=0, cpunumber=0
                         search_str = 'BSUB -x'
                         string_should_contain(contents, search_str)
                 elif lrms == 'slurm':
-                        print "slurm not supported, some test may fail"
-
+                        search_str = 'SBATCH -N 1'
+                        string_should_contain(contents, search_str)
+                        search_str = 'SBATCH --ntasks-per-node ' + str(smpsize)
+                        string_should_contain(contents, search_str)
+			search_str = 'SBATCH --exclusive'
+                        string_should_contain(contents, search_str)
                 else:
-                        raise _error('Batch system must be either PBS or LSF but you entered: "' + batch_system + '" (' + lrms + ')')
+                        raise _error('Batch system must be either PBS, LSF or SLURM but you entered: "' + batch_system + '" (' + lrms + ')')
         elif ttype == 3: # JDL Attributes: WholeNodes=true, HostNumber=H
                 # Verification for LSF: BSUB -n S*H, BSUB -R "span[ptiles=S]", BSUB -x
                 # Verification for PBS: PBS -l nodes=H:ppn=S, PBS -W x=NACCESSPOLICY:SINGLEJOB
@@ -4364,9 +4425,12 @@ def cpu_allocation_test(jid, ce_endpoint, test_type=0, wholenodes=0, cpunumber=0
                         search_str = 'BSUB -x'
                         string_should_contain(contents, search_str)
                 elif lrms == 'slurm':
-                        print "slurm not supported, some test may fail"
+                        search_str = 'SBATCH -N ' + str(hostnumber)
+                        string_should_contain(contents, search_str)
+			search_str = 'SBATCH --exclusive'
+			string_should_contain(contents, search_str)
                 else:
-                        raise _error('Batch system must be either PBS or LSF but you entered: "' + batch_system + '" (' + lrms + ')')
+                        raise _error('Batch system must be either PBS, LSF or SLURM but you entered: "' + batch_system + '" (' + lrms + ')')
         elif ttype == 4: # JDL Attributes: WholeNodes=false, SMPGranularity=G, CPUNumber=C
                 # Verification for LSF: BSUB -n C, BSUB -R "span[ptile=G]"
                 # Verification for PBS: PBS -l nodes=N:ppn=G { [+1:ppn=R] if r>0 }
@@ -4384,7 +4448,12 @@ def cpu_allocation_test(jid, ce_endpoint, test_type=0, wholenodes=0, cpunumber=0
                         search_string = 'BSUB -R "span[ptile=' + str(smpgranularity) + ']"'
                         string_should_contain(contents, search_str)
                 elif lrms == 'slurm':
-                        print "slurm not supported, some test may fail"
+                        n = int(cpunumber) / int(smpgranularity)
+                        r = int(cpunumber) % int(smpgranularity)
+ 	  	        search_str = 'SBATCH -N ' + str(n)
+                        string_should_contain(contents, search_str)
+                        search_str = 'SBATCH --ntasks-per-node ' + str(smpgranularity)
+                        string_should_contain(contents, search_str)
                 else:
                         raise _error('Batch system must be either PBS or LSF but you entered: "' + batch_system + '" (' + lrms + ')')
         elif ttype == 5: # JDL Attributes: WholeNodes=false, HostNumber=H, CPUNumber=C, H>1
@@ -4406,9 +4475,11 @@ def cpu_allocation_test(jid, ce_endpoint, test_type=0, wholenodes=0, cpunumber=0
                         search_str = 'BSUB -R "span[ptile=' + str(n) + ']"'
                         string_should_contain(contents, search_str)
                 elif lrms == 'slurm':
-                        print "slurm not supported, some test may fail"
+			search_str = 'SBATCH -N ' + cpunumber 
+			string_should_contain(contents, search_str)
+
                 else:
-                        raise _error('Batch system must be either PBS or LSF but you entered: "' + batch_system + '" (' + lrms + ')')
+                        raise _error('Batch system must be either PBS,LSF or SLURM but you entered: "' + batch_system + '" (' + lrms + ')')
         elif ttype == 6: # JDL Attributes: WholeNodes=false, CPUNumber=C
                 # Verification for LSF: BSUB -n C
                 # Verification for PBS: PBS -l nodes=C
@@ -4419,9 +4490,10 @@ def cpu_allocation_test(jid, ce_endpoint, test_type=0, wholenodes=0, cpunumber=0
                         search_str = 'BSUB -n ' + str(cpunumber)
                         string_should_contain(contents, search_str)
                 elif lrms == 'slurm':
-                        print "slurm not supported, some test may fail"
+                        search_str = 'SBATCH -n ' + str(cpunumber)
+                        string_should_contain(contents, search_str)
                 else:
-                        raise _error('Batch system must be either PBS or LSF but you entered: "' + batch_system + '" (' + lrms + ')')
+                        raise _error('Batch system must be either PBS, LSF or SLURM but you entered: "' + batch_system + '" (' + lrms + ')')
 
 ##############################################################################################################################
 ##############################################################################################################################
